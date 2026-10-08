@@ -1,0 +1,210 @@
+[
+ [
+  "ISO/IEC 25010:2011 Systems and software Quality Requirements and Evaluation (SQuaRE)",
+  "https://www.iso.org/standard/35736.html"
+ ],
+ [
+  "ISO/IEC 25023:2016 SQuaRE \u2014 Measurement of system and software product quality",
+  "https://www.iso.org/standard/64774.html"
+ ],
+ [
+  "ISTQB Foundation Level Syllabus 2018",
+  "https://www.istqb.org/certifications/foundation-level"
+ ],
+ [
+  "ISTQB glossary of testing terms",
+  "https://glossary.istqb.org"
+ ],
+ [
+  "OWASP Top 10 (2021)",
+  "https://owasp.org/www-project-top-ten/"
+ ],
+ [
+  "OWASP Testing Guide",
+  "https://owasp.org/www-project-web-security-testing-guide/"
+ ],
+ [
+  "OWASP XSS Prevention Cheat Sheet",
+  "https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html"
+ ],
+ [
+  "OWASP Broken Access Control (IDOR)",
+  "https://owasp.org/Top10/A01_2021-Broken_Access_Control/"
+ ],
+ [
+  "OWASP Mass Assignment / Over-posting",
+  "https://owasp.org/www-community/attacks/Mass_assignment"
+ ],
+ [
+  "OWASP SQL Injection Prevention Cheat Sheet",
+  "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+ ],
+ [
+  "OWASP Authentication Cheat Sheet",
+  "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html"
+ ],
+ [
+  "OWASP Session Management Cheat Sheet",
+  "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html"
+ ],
+ [
+  "OWASP API Security Top 10 (2023)",
+  "https://owasp.org/API-Security/editions/2023/en/0x11-t10/"
+ ],
+ [
+  "CWE-639: Authorization Bypass Through User-Controlled Key (IDOR)",
+  "https://cwe.mitre.org/data/definitions/639.html"
+ ],
+ [
+  "CWE-79: Cross-site Scripting",
+  "https://cwe.mitre.org/data/definitions/79.html"
+ ],
+ [
+  "CWE-862: Missing Authorization",
+  "https://cwe.mitre.org/data/definitions/862.html"
+ ],
+ [
+  "CWE-863: Incorrect Authorization",
+  "https://cwe.mitre.org/data/definitions/863.html"
+ ],
+ [
+  "W3C Web Content Accessibility Guidelines (WCAG) 2.1",
+  "https://www.w3.org/TR/WCAG21/"
+ ],
+ [
+  "W3C Web Accessibility Tutorials",
+  "https://www.w3.org/WAI/tutorials/"
+ ],
+ [
+  "Mozilla MDN \u2014 CORS",
+  "https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS"
+ ],
+ [
+  "Mozilla MDN \u2014 HTTP security headers",
+  "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers"
+ ],
+ [
+  "Mozilla MDN \u2014 Web Storage API",
+  "https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API"
+ ],
+ [
+  "Mozilla MDN \u2014 Responsive design",
+  "https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design"
+ ],
+ [
+  "JWT.io \u2014 Introduction to JSON Web Tokens",
+  "https://jwt.io/introduction"
+ ],
+ [
+  "RFC 7519 \u2014 JSON Web Token (JWT)",
+  "https://tools.ietf.org/html/rfc7519"
+ ],
+ [
+  "Microsoft Learn \u2014 REST API design best practices",
+  "https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design"
+ ],
+ [
+  "Sequelize documentation \u2014 Validations",
+  "https://sequelize.org/docs/v6/core-concepts/validations/"
+ ],
+ [
+  "Sequelize dialect-specific things (SQLite/Postgres)",
+  "https://sequelize.org/docs/v6/other-topics/dialect-specific-things/"
+ ],
+ [
+  "Express.js security best practices",
+  "https://expressjs.com/en/advanced/best-practice-security.html"
+ ],
+ [
+  "Helmet.js",
+  "https://helmetjs.github.io/"
+ ],
+ [
+  "express-rate-limit",
+  "https://github.com/express-rate-limit/express-rate-limit"
+ ],
+ [
+  "Playwright documentation",
+  "https://playwright.dev/docs/intro"
+ ],
+ [
+  "Python requests documentation",
+  "https://requests.readthedocs.io/"
+ ],
+ [
+  "Karl Wiegers \u2014 Writing effective defect reports",
+  "https://www.processimpact.com/articles/bug_report.html"
+ ],
+ [
+  "James Bach \u2014 Session-based exploratory testing",
+  "https://www.satisfice.com/blog/archives/278"
+ ],
+ [
+  "Michael Bolton \u2014 The oracle problem",
+  "https://www.developsense.com/blog/2009/08/the-oracle-problem/"
+ ],
+ [
+  "IEEE 829 Test Documentation standard (reference)",
+  "https://standards.ieee.org/ieee/829/4317/"
+ ],
+ [
+  "ISTQB Defect / Defect lifecycle",
+  "https://glossary.istqb.org/en_US/defect"
+ ],
+ [
+  "Google developers \u2014 Speed / PageSpeed Insights",
+  "https://developers.google.com/speed"
+ ],
+ [
+  "web.dev \u2014 Best Practices",
+  "https://web.dev/learn/"
+ ],
+ [
+  "Can I use",
+  "https://caniuse.com/"
+ ],
+ [
+  "Caddy documentation",
+  "https://caddyserver.com/docs/"
+ ],
+ [
+  "PM2 documentation",
+  "https://pm2.keymetrics.io/docs/usage/quick-start/"
+ ],
+ [
+  "React documentation",
+  "https://react.dev/learn/managing-state"
+ ],
+ [
+  "Vite documentation \u2014 env variables",
+  "https://vitejs.dev/guide/env-and-mode.html"
+ ],
+ [
+  "React Router documentation",
+  "https://reactrouter.com/home"
+ ],
+ [
+  "NIST SP 800-63B password guidelines",
+  "https://pages.nist.gov/800-63-3/sp800-63b.html"
+ ],
+ [
+  "CampusPool live deployment",
+  "https://carpool.33.jugaar.ai"
+ ],
+ [
+  "CampusPool API health",
+  "https://carpool.33.jugaar.ai/api/health"
+ ],
+ [
+  "CampusPool source (local repo README)",
+  "file:///root/campuspool/README.md"
+ ],
+ [
+  "CampusPool DEPLOYMENT guide (local)",
+  "file:///root/campuspool/DEPLOYMENT.md"
+ ],
+ [
+  "Course defect-report format reference (Lewis-style)",
+  "https://www.processimpact.com/articles/bug_report.html"
+ ]
+]

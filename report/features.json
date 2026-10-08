@@ -1,0 +1,106 @@
+[
+ [
+  "Authentication & Accounts",
+  [
+   "Email/password registration (name, email, phone, university, department, year)",
+   "Login with JWT session token",
+   "Logout (client-side token clear)",
+   "Demo account quick-login cards on login page",
+   "Student verification self-service button (isVerified flag)",
+   "Profile view and edit (fullName, phone, university, department, year, photo)",
+   "Remember-me checkbox (UI only)",
+   "Forgot password link (UI only, non-functional)"
+  ]
+ ],
+ [
+  "Rides (Driver)",
+  [
+   "Create/offer a ride (Karachi location dropdowns, date/time, seats 1-6, price, vehicle type, AC, notes)",
+   "Recurring ride days (Mon-Fri) selection",
+   "My rides \u2014 upcoming/past tabs",
+   "Cancel own ride",
+   "Driver dashboard \u2014 confirm/reject pending bookings",
+   "Complete ride action (driver)",
+   "Ride search with filters (seats, max price, vehicle type, AC)",
+   "Ride detail page with driver card and reviews list"
+  ]
+ ],
+ [
+  "Bookings (Passenger)",
+  [
+   "Book ride with seats selector and price total",
+   "My bookings \u2014 upcoming/past, cancel booking",
+   "Pay Now flow for confirmed bookings",
+   "Rate ride (stars + comment) after completed rides",
+   "Unread message badge in navbar"
+  ]
+ ],
+ [
+  "Payments",
+  [
+   "Payment method selection: JazzCash, EasyPaisa, Bank, Cash",
+   "Mobile wallet phone number input",
+   "Bank transfer details display (HBL hardcoded)",
+   "Simulated payment success screen with transaction id",
+   "Refund request API (server-side)"
+  ]
+ ],
+ [
+  "Messaging",
+  [
+   "Conversation list",
+   "1:1 chat interface",
+   "Unread badge polling every 30 seconds",
+   "Message send/receive via REST API"
+  ]
+ ],
+ [
+  "Safety & Impact",
+  [
+   "Emergency SOS UI (dials tel:15)",
+   "Police/Ambulance/Edhi contact numbers",
+   "Emergency contacts (local state only)",
+   "Mock live-location link",
+   "Impact dashboard UI (CO2/fuel savings, client-computed/mock)",
+   "Impact leaderboard API (public)",
+   "Safety SOS API endpoints (alerts + history)"
+  ]
+ ],
+ [
+  "Marketing / Mock Pages (not API-backed)",
+  [
+   "Premium plans page (Free/Pro/Elite pricing UI)",
+   "Earnings dashboard (hardcoded totals/charts)",
+   "Achievements / gamification badges and leaderboards",
+   "Smart Match (AI ride matching, mock)",
+   "Marketplace (deals, events, lost & found, mock)",
+   "Sponsored rides (brand deals, mock)",
+   "City selector (5 Pakistani cities, mock stats)",
+   "Home landing marketing page (fabricated stats)",
+   "Public user profile page (mock/local)",
+   "Admin pages (empty directory, unimplemented)"
+  ]
+ ],
+ [
+  "Search & Discovery",
+  [
+   "Ride search form (From/To/Date + filters)",
+   "Client-side sort/name filter on results",
+   "Hardcoded Karachi location coordinates"
+  ]
+ ],
+ [
+  "Non-functional features claimed or observed",
+  [
+   "HTTPS via Caddy reverse proxy with HSTS",
+   "Security headers partially set (HSTS, nosniff, Referrer-Policy)",
+   "Helmet middleware on API (CSP on API responses)",
+   "Rate limiting on auth/rides/bookings/payments",
+   "HTML-escape sanitize middleware on request bodies",
+   "JWT auth with bcrypt password hashing",
+   "Sequelize ORM with SQLite (dev) / PostgreSQL (prod intent)",
+   "PM2 process management for API",
+   "Responsive Tailwind CSS layout"
+  ]
+ ]
+]

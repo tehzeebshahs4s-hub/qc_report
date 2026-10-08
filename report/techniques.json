@@ -1,0 +1,667 @@
+[
+ [
+  "Unit testing",
+  "Level",
+  "Code-level verification via source review"
+ ],
+ [
+  "Integration testing",
+  "Level",
+  "API endpoint + controller + model via HTTP"
+ ],
+ [
+  "System testing",
+  "Level",
+  "End-to-end app behaviour on production URL"
+ ],
+ [
+  "Acceptance testing (UAT)",
+  "Level",
+  "Journey checks against business rules"
+ ],
+ [
+  "End-to-end testing",
+  "Level",
+  "Playwright browser journeys across pages"
+ ],
+ [
+  "Regression testing",
+  "Level",
+  "Re-runs of critical paths after each phase"
+ ],
+ [
+  "Smoke testing",
+  "Level",
+  "Health check + home/login/search baseline"
+ ],
+ [
+  "Sanity testing",
+  "Level",
+  "Focused checks on booking and auth flows"
+ ],
+ [
+  "Black-box testing",
+  "Approach",
+  "Behaviour driven by UI/API only"
+ ],
+ [
+  "White-box testing",
+  "Approach",
+  "Source-informed tests (controllers, models)"
+ ],
+ [
+  "Grey-box testing",
+  "Approach",
+  "Combined API knowledge + UI observation"
+ ],
+ [
+  "Static testing",
+  "Approach",
+  "Code/config review without execution"
+ ],
+ [
+  "Dynamic testing",
+  "Approach",
+  "Execution of app against live URL"
+ ],
+ [
+  "Exploratory testing",
+  "Approach",
+  "Session-based unscripted exploration"
+ ],
+ [
+  "Ad-hoc testing",
+  "Approach",
+  "Impromptu checks while navigating features"
+ ],
+ [
+  "Error guessing",
+  "Approach",
+  "Intuition on seats, JWT, payments defect areas"
+ ],
+ [
+  "Script-based testing",
+  "Approach",
+  "Python Playwright + requests evidence scripts"
+ ],
+ [
+  "Equivalence partitioning",
+  "Method",
+  "Valid/invalid partitions for email, seats, price"
+ ],
+ [
+  "Boundary value analysis",
+  "Method",
+  "0/-1/1/7/8 seats, rating 0/5/99, password 5/6"
+ ],
+ [
+  "Decision table testing",
+  "Method",
+  "Booking rules combinations"
+ ],
+ [
+  "State transition testing",
+  "Method",
+  "Ride/booking/payment status machines"
+ ],
+ [
+  "Cause-effect graphing",
+  "Method",
+  "Input conditions to booking/payment outcomes"
+ ],
+ [
+  "Pairwise / combinatorial testing",
+  "Method",
+  "Vehicle x seats x price x AC x date"
+ ],
+ [
+  "Domain testing",
+  "Method",
+  "Karachi areas and seat domain 1-7"
+ ],
+ [
+  "Comparison testing",
+  "Method",
+  "UI result vs direct API result"
+ ],
+ [
+  "Scenario testing",
+  "Method",
+  "Real student commute scenarios (FAST-NUCES)"
+ ],
+ [
+  "Business workflow testing",
+  "Method",
+  "Full carpool lifecycle journeys"
+ ],
+ [
+  "Functional testing",
+  "Functional",
+  "Auth, rides, bookings, messages correctness"
+ ],
+ [
+  "Business logic testing",
+  "Functional",
+  "Seat math, amountPaid, own-ride rule"
+ ],
+ [
+  "Workflow testing",
+  "Functional",
+  "Offer ride -> book -> confirm -> complete"
+ ],
+ [
+  "CRUD testing",
+  "Functional",
+  "Create/Read/Update/Delete entities"
+ ],
+ [
+  "Form validation testing",
+  "Functional",
+  "Required fields, types, ranges on forms"
+ ],
+ [
+  "Search / filter testing",
+  "Functional",
+  "Origin/destination/seats/price filters"
+ ],
+ [
+  "Sorting / pagination testing",
+  "Functional",
+  "Ride list order and limit/offset"
+ ],
+ [
+  "Booking lifecycle testing",
+  "Functional",
+  "Create, confirm, cancel, complete, rate"
+ ],
+ [
+  "Payment flow testing",
+  "Functional",
+  "Method selection, success, double-pay, refund"
+ ],
+ [
+  "Messaging testing",
+  "Functional",
+  "Send, conversations, empty content, XSS"
+ ],
+ [
+  "Profile management testing",
+  "Functional",
+  "View/update profile fields"
+ ],
+ [
+  "Rating / review testing",
+  "Functional",
+  "Review creation rules and bounds"
+ ],
+ [
+  "Notification / badge testing",
+  "Functional",
+  "Unread message badge behaviour"
+ ],
+ [
+  "UI testing",
+  "UI",
+  "Visual layout, components, form controls"
+ ],
+ [
+  "Usability testing",
+  "UI",
+  "Ease of tasks, error message clarity"
+ ],
+ [
+  "Navigation testing",
+  "UI",
+  "Dead links, route handling, 404"
+ ],
+ [
+  "Consistency testing",
+  "UI",
+  "Naming, spacing, colour consistency"
+ ],
+ [
+  "Content / copy review",
+  "UI",
+  "Marketing claims vs reality"
+ ],
+ [
+  "Empty-state testing",
+  "UI",
+  "Behaviour with no rides/bookings/messages"
+ ],
+ [
+  "Loading-state testing",
+  "UI",
+  "Perceived performance during page load"
+ ],
+ [
+  "Error-state testing",
+  "UI",
+  "Wrong password, invalid inputs, API failures"
+ ],
+ [
+  "Confirmation dialog testing",
+  "UI",
+  "Destructive actions (cancel ride/booking)"
+ ],
+ [
+  "Help text / affordance testing",
+  "UI",
+  "Labels and guidance completeness"
+ ],
+ [
+  "Onboarding flow testing",
+  "UI",
+  "First-run experience for new users"
+ ],
+ [
+  "Accessibility testing (WCAG)",
+  "UI",
+  "Alt text, labels, button names"
+ ],
+ [
+  "Keyboard navigation testing",
+  "UI",
+  "Tab order / focusability spot checks"
+ ],
+ [
+  "Screen reader compatibility check",
+  "UI",
+  "ARIA/label presence via DOM audit"
+ ],
+ [
+  "Color contrast spot-check",
+  "UI",
+  "Visual inspection of text backgrounds"
+ ],
+ [
+  "Internationalization readiness",
+  "UI",
+  "Date/currency/phone formats (PK)"
+ ],
+ [
+  "Localization testing",
+  "UI",
+  "Currency Rs., phone +92, university names"
+ ],
+ [
+  "RTL / language toggle review",
+  "UI",
+  "Urdu/English claims vs implementation"
+ ],
+ [
+  "Cross-browser testing",
+  "Compatibility",
+  "Chromium + Firefox + WebKit render"
+ ],
+ [
+  "Cross-platform testing",
+  "Compatibility",
+  "Linux host; engines covering Win/Mac"
+ ],
+ [
+  "Responsive design testing",
+  "Compatibility",
+  "320-1920px viewport overflow checks"
+ ],
+ [
+  "Device emulation testing",
+  "Compatibility",
+  "iPhone SE/14, Galaxy S, iPad sizes"
+ ],
+ [
+  "Touch vs mouse testing",
+  "Compatibility",
+  "Mobile viewport tap targets"
+ ],
+ [
+  "Screen resolution testing",
+  "Compatibility",
+  "360, 375, 390, 768, 1024, 1440 widths"
+ ],
+ [
+  "Browser zoom / scaling review",
+  "Compatibility",
+  "Layout at high DPI viewports"
+ ],
+ [
+  "Dark/light theme review",
+  "Compatibility",
+  "Theme consistency where applicable"
+ ],
+ [
+  "Load testing",
+  "Performance",
+  "Search API large limit; page load timing"
+ ],
+ [
+  "Stress testing",
+  "Performance",
+  "limit=999999 query abuse check"
+ ],
+ [
+  "Spike testing",
+  "Performance",
+  "Rapid sequential API calls"
+ ],
+ [
+  "Endurance / soak awareness",
+  "Performance",
+  "Long-lived JWT / session design review"
+ ],
+ [
+  "Volume testing",
+  "Performance",
+  "Large payload registration"
+ ],
+ [
+  "Scalability review",
+  "Performance",
+  "Caching, pagination, query patterns"
+ ],
+ [
+  "Concurrency / race condition testing",
+  "Performance",
+  "Seat decrement without transaction"
+ ],
+ [
+  "Latency testing",
+  "Performance",
+  "Navigation timing on home page"
+ ],
+ [
+  "Bundle / resource size review",
+  "Performance",
+  "Asset sizes via network metrics"
+ ],
+ [
+  "Bandwidth throttling review",
+  "Performance",
+  "Mobile viewport behaviour"
+ ],
+ [
+  "Offline / network error testing",
+  "Performance",
+  "API fallback to mock data"
+ ],
+ [
+  "CPU / memory spot-check",
+  "Performance",
+  "Headless browser session stability"
+ ],
+ [
+  "Authentication testing",
+  "Security",
+  "Login/logout, wrong password, empty password"
+ ],
+ [
+  "Authorization testing",
+  "Security",
+  "Protected routes without/with invalid JWT"
+ ],
+ [
+  "Session management testing",
+  "Security",
+  "JWT localStorage, 7-day expiry, revoke gap"
+ ],
+ [
+  "Token security testing",
+  "Security",
+  "Garbage token, payload tampering rejection"
+ ],
+ [
+  "OWASP Top 10 review",
+  "Security",
+  "Mapped findings to OWASP categories"
+ ],
+ [
+  "XSS testing",
+  "Security",
+  "Stored/reflected payloads in name, notes, messages"
+ ],
+ [
+  "SQL injection testing",
+  "Security",
+  "Parameter fuzzing via ORM usage review"
+ ],
+ [
+  "CSRF testing",
+  "Security",
+  "Bearer-token architecture reduces classic CSRF"
+ ],
+ [
+  "IDOR / broken access control testing",
+  "Security",
+  "Cross-user booking/ride/profile access"
+ ],
+ [
+  "Mass assignment testing",
+  "Security",
+  "Extra fields on ride create/update"
+ ],
+ [
+  "Privilege escalation testing",
+  "Security",
+  "Passenger self-confirm, self-verify"
+ ],
+ [
+  "Account enumeration testing",
+  "Security",
+  "Login responses for unknown vs wrong password"
+ ],
+ [
+  "Brute force / rate limiting testing",
+  "Security",
+  "Burst requests on unprotected routes"
+ ],
+ [
+  "Password policy testing",
+  "Security",
+  "Min length 6, complexity expectations"
+ ],
+ [
+  "Input validation / fuzzing",
+  "Security",
+  "Invalid email/phone/status/limit params"
+ ],
+ [
+  "Security header testing",
+  "Security",
+  "CSP, XFO, HSTS, Permissions-Policy audit"
+ ],
+ [
+  "HTTPS / transport testing",
+  "Security",
+  "HSTS header present on live site"
+ ],
+ [
+  "CORS testing",
+  "Security",
+  "Evil origin probe on API"
+ ],
+ [
+  "Sensitive data exposure testing",
+  "Security",
+  "Phone/PII in public APIs"
+ ],
+ [
+  "Error message leakage review",
+  "Security",
+  "Generic vs verbose error strings"
+ ],
+ [
+  "Injection in API parameters",
+  "Security",
+  "Query/body fuzzing via script"
+ ],
+ [
+  "API testing",
+  "API",
+  "All auth/rides/bookings/payments/messages endpoints"
+ ],
+ [
+  "HTTP method testing",
+  "API",
+  "GET/POST/PUT usage per REST design"
+ ],
+ [
+  "HTTP status code testing",
+  "API",
+  "200/201/400/401/403/404/500 behaviour"
+ ],
+ [
+  "Content-type / payload testing",
+  "API",
+  "JSON body handling"
+ ],
+ [
+  "Response schema / contract testing",
+  "API",
+  "success/message/data shape consistency"
+ ],
+ [
+  "Pagination / limit testing",
+  "API",
+  "limit/offset parameters"
+ ],
+ [
+  "Database constraint testing",
+  "API",
+  "Sequelize validation min/max/isEmail/is"
+ ],
+ [
+  "Data integrity testing",
+  "API",
+  "Seat inventory before/after cancel"
+ ],
+ [
+  "Transaction / ACID review",
+  "API",
+  "Missing transaction on booking seat update"
+ ],
+ [
+  "Seed data validation",
+  "API",
+  "Demo users/rides from backend boot seed"
+ ],
+ [
+  "Migration / sync behavior testing",
+  "API",
+  "sequelize.sync force:true impact"
+ ],
+ [
+  "Reliability testing",
+  "Non-functional",
+  "DB wipe on restart, mock fallback"
+ ],
+ [
+  "Recovery testing",
+  "Non-functional",
+  "Behaviour after failed booking/payment"
+ ],
+ [
+  "Install / deploy config review",
+  "Non-functional",
+  "Procfile, render.yaml, PM2, Caddy"
+ ],
+ [
+  "Documentation review",
+  "Non-functional",
+  "README claims vs implemented features"
+ ],
+ [
+  "SEO / metadata testing",
+  "Non-functional",
+  "Title, meta tags on live HTML"
+ ],
+ [
+  "Dead-link testing",
+  "Non-functional",
+  "Forgot password and nav links"
+ ],
+ [
+  "Logging / console error review",
+  "Non-functional",
+  "Browser console during critical pages"
+ ],
+ [
+  "Health-check testing",
+  "Non-functional",
+  "GET /api/health"
+ ],
+ [
+  "Maintainability observation",
+  "Non-functional",
+  "Code smells reported as QA findings"
+ ],
+ [
+  "Process / QA readiness review",
+  "Non-functional",
+  "Absence of automated tests"
+ ],
+ [
+  "Configuration security review",
+  "Non-functional",
+  "Hardcoded secrets, CORS allowlist"
+ ],
+ [
+  "Session-based exploratory testing",
+  "Exploratory",
+  "Time-boxed exploration notes per module"
+ ],
+ [
+  "Monkey / random testing",
+  "Exploratory",
+  "Random invalid params and rapid clicks"
+ ],
+ [
+  "Key-tour testing",
+  "Exploratory",
+  "Critical path tours without detailed scripts"
+ ],
+ [
+  "Persona-based testing",
+  "Exploratory",
+  "Student passenger vs driver personas"
+ ],
+ [
+  "Crowd-style scenario testing",
+  "Exploratory",
+  "Multiple concurrent user roles via API"
+ ],
+ [
+  "Data-driven testing",
+  "Exploratory",
+  "Scripted datasets for seats/price/status"
+ ],
+ [
+  "Mutation-style input testing",
+  "Exploratory",
+  "Mutating valid requests with invalid fields"
+ ],
+ [
+  "Chaos awareness review",
+  "Exploratory",
+  "Backend restart impact (DB wipe)"
+ ],
+ [
+  "Accessibility regression spot-check",
+  "Exploratory",
+  "Repeat label/alt audits"
+ ],
+ [
+  "Performance budget check",
+  "Exploratory",
+  "Home load timing vs expectations"
+ ],
+ [
+  "Cross-session data check",
+  "Exploratory",
+  "Data persistence across browser sessions"
+ ],
+ [
+  "Error recovery path testing",
+  "Exploratory",
+  "What user sees after failures"
+ ]
+]
