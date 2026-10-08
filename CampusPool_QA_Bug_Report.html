@@ -4,62 +4,62 @@
 <meta charset="utf-8"/>
 <title>CampusPool — Quality Assurance Bug Report</title>
 <style>
-@page { size: A4; margin: 14mm 12mm; }
+@page { size: A4; margin: 12mm 11mm; }
 * { box-sizing: border-box; }
-body { font-family: 'Segoe UI', Calibri, Arial, sans-serif; color: #1a1a1a; margin: 0; line-height: 1.35; font-size: 11pt; }
-.cover { page-break-after: always; text-align: center; padding-top: 30mm; }
+body { font-family: 'Segoe UI', Calibri, Arial, sans-serif; color: #1a1a1a; margin: 0; line-height: 1.3; font-size: 10.5pt; }
+.cover { break-after: page; text-align: center; padding-top: 22mm; }
 .cover h1 { font-size: 26pt; margin: 0 0 8pt; color: #0b3d5c; }
 .cover h2 { font-size: 16pt; font-weight: 600; margin: 0 0 4pt; }
-.cover .sub { font-size: 12pt; color: #444; margin-bottom: 16pt; }
-.cover table { margin: 12pt auto; border-collapse: collapse; width: 88%; text-align: left; }
-.cover td, .cover th { border: 1px solid #ccc; padding: 7pt 9pt; font-size: 10.5pt; }
+.cover .sub { font-size: 11.5pt; color: #444; margin-bottom: 14pt; }
+.cover table { margin: 10pt auto; border-collapse: collapse; width: 88%; text-align: left; }
+.cover td, .cover th { border: 1px solid #ccc; padding: 6pt 8pt; font-size: 10pt; }
 .cover th { background: #0b3d5c; color: #fff; width: 36%; }
-.cover .footer-note { margin-top: 20pt; font-size: 9.5pt; color: #555; }
-h2.sec { color: #0b3d5c; border-bottom: 2px solid #0b3d5c; padding-bottom: 4pt; margin-top: 16pt; font-size: 14pt; }
-h3 { color: #0b3d5c; font-size: 12pt; margin: 10pt 0 4pt; }
-table.data { border-collapse: collapse; width: 100%; margin: 8pt 0 14pt; font-size: 9.5pt; }
-table.data th, table.data td { border: 1px solid #bbb; padding: 4pt 5pt; vertical-align: top; }
+.cover .footer-note { margin-top: 16pt; font-size: 9pt; color: #555; }
+h2.sec { color: #0b3d5c; border-bottom: 2px solid #0b3d5c; padding-bottom: 3pt; margin-top: 12pt; font-size: 13pt; break-after: avoid; }
+h3 { color: #0b3d5c; font-size: 11pt; margin: 8pt 0 3pt; break-after: avoid; }
+table.data { border-collapse: collapse; width: 100%; margin: 6pt 0 10pt; font-size: 9pt; }
+table.data th, table.data td { border: 1px solid #bbb; padding: 3pt 4pt; vertical-align: top; }
 table.data th { background: #e8eef3; text-align: left; }
 table.data tr:nth-child(even) td { background: #f7fafc; }
-.sev { display: inline-block; padding: 2pt 7pt; border-radius: 3pt; font-weight: 700; font-size: 9.5pt; color: #fff; }
+.sev { display: inline-block; padding: 1pt 6pt; border-radius: 2pt; font-weight: 700; font-size: 9pt; color: #fff; }
 .sev-critical { background: #8b0000; }
 .sev-high { background: #c0392b; }
 .sev-medium { background: #d68910; }
 .sev-low { background: #2980b9; }
 .toc a { color: #0b3d5c; text-decoration: none; }
-.toc li { margin: 2pt 0; font-size: 10pt; }
-.bug-page { page-break-before: always; border: 1px solid #ccc; padding: 10pt 12pt 8pt; }
-.bug-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4pt; }
-.bug-id-box { font-size: 11pt; font-weight: 700; color: #0b3d5c; }
-.bug-title { font-size: 13pt; color: #111; margin: 2pt 0 8pt; }
-table.meta { border-collapse: collapse; width: 100%; font-size: 9.5pt; margin-bottom: 8pt; }
-table.meta th { background: #0b3d5c; color: #fff; text-align: left; width: 28%; padding: 3pt 5pt; border: 1px solid #0b3d5c; }
-table.meta td { padding: 3pt 5pt; border: 1px solid #bbb; }
-ol, ul { margin: 3pt 0 6pt 16pt; padding: 0; }
-li { margin: 1pt 0; }
-code, pre { font-family: 'Consolas', 'Courier New', monospace; font-size: 8.5pt; }
-code { background: #f0f0f0; padding: 1pt 2pt; }
-pre.actual { background: #f6f8fa; border: 1px solid #ddd; padding: 6pt; white-space: pre-wrap; word-break: break-word; max-height: 160px; overflow: auto; margin: 4pt 0; }
-.oracle { background: #eef7ee; border-left: 4px solid #27ae60; padding: 5pt 7pt; margin: 4pt 0; }
-.impact { background: #fff8e6; border-left: 4px solid #d68910; padding: 5pt 7pt; margin: 4pt 0; }
-.notes { font-size: 9.5pt; }
-.shot-box { margin: 4pt 0; }
-.shot-box img { max-width: 100%; border: 1px solid #ccc; }
-.shot-cap { font-size: 8.5pt; color: #555; margin-top: 1pt; }
-.no-shot { font-size: 9pt; color: #555; font-style: italic; }
-.bug-footer { margin-top: 6pt; padding-top: 4pt; border-top: 1px dashed #aaa; font-size: 8.5pt; color: #333; }
-.summary-grid { display: flex; gap: 8pt; margin: 8pt 0; flex-wrap: wrap; }
-.summary-card { flex: 1; min-width: 70pt; border: 1px solid #ccc; border-radius: 4pt; padding: 6pt; text-align: center; }
-.summary-card .num { font-size: 20pt; font-weight: 800; color: #0b3d5c; }
-.summary-card .lbl { font-size: 9pt; color: #555; }
-.appendix-page { page-break-before: always; }
-.tech-grid { columns: 2; font-size: 8.5pt; margin: 0; padding-left: 14pt; }
-.tech-grid li { break-inside: avoid; margin-bottom: 1pt; }
-.link-list { font-size: 9pt; margin: 0; padding-left: 14pt; }
+.toc li { margin: 1pt 0; font-size: 9.5pt; }
+.bug-page { break-before: page; break-inside: auto; padding: 0; border: none; margin: 0; }
+.bug-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2pt; }
+.bug-id-box { font-size: 10.5pt; font-weight: 700; color: #0b3d5c; }
+.bug-title { font-size: 12pt; color: #111; margin: 0 0 6pt; }
+table.meta { border-collapse: collapse; width: 100%; font-size: 8.5pt; margin-bottom: 6pt; }
+table.meta th { background: #0b3d5c; color: #fff; text-align: left; width: 26%; padding: 2pt 4pt; border: 1px solid #0b3d5c; }
+table.meta td { padding: 2pt 4pt; border: 1px solid #bbb; }
+ol, ul { margin: 2pt 0 4pt 14pt; padding: 0; }
+li { margin: 0; }
+code, pre { font-family: 'Consolas', 'Courier New', monospace; font-size: 8pt; }
+code { background: #f0f0f0; padding: 0 2pt; }
+pre.actual { background: #f6f8fa; border: 1px solid #ddd; padding: 4pt; white-space: pre-wrap; word-break: break-word; max-height: 110px; overflow: hidden; margin: 2pt 0; }
+.oracle { background: #eef7ee; border-left: 3px solid #27ae60; padding: 3pt 6pt; margin: 2pt 0; font-size: 9.5pt; }
+.impact { background: #fff8e6; border-left: 3px solid #d68910; padding: 3pt 6pt; margin: 2pt 0; font-size: 9.5pt; }
+.notes { font-size: 8.5pt; margin: 2pt 0; }
+.shot-box { margin: 2pt 0; }
+.shot-box img { max-width: 100%; max-height: 220px; width: auto; height: auto; border: 1px solid #ccc; }
+.shot-cap { font-size: 8pt; color: #555; }
+.no-shot { font-size: 8.5pt; color: #555; font-style: italic; margin: 2pt 0; }
+.bug-footer { margin-top: 4pt; padding-top: 3pt; border-top: 1px dashed #aaa; font-size: 8pt; color: #333; }
+.summary-grid { display: flex; gap: 6pt; margin: 6pt 0; flex-wrap: wrap; }
+.summary-card { flex: 1; min-width: 65pt; border: 1px solid #ccc; border-radius: 3pt; padding: 5pt; text-align: center; }
+.summary-card .num { font-size: 18pt; font-weight: 800; color: #0b3d5c; }
+.summary-card .lbl { font-size: 8.5pt; color: #555; }
+.appendix-page { break-before: page; }
+.tech-grid { columns: 2; font-size: 8pt; margin: 0; padding-left: 12pt; }
+.tech-grid li { break-inside: avoid; margin-bottom: 0; }
+.link-list { font-size: 8.5pt; margin: 0; padding-left: 12pt; }
 .link-list li { margin-bottom: 2pt; word-break: break-all; }
-.sig { margin-top: 36pt; display: flex; justify-content: space-between; font-size: 10.5pt; }
-.sig div { width: 42%; border-top: 1px solid #333; padding-top: 5pt; text-align: center; }
-.small { font-size: 9pt; color: #444; }
+.sig { margin-top: 28pt; display: flex; justify-content: space-between; font-size: 10pt; }
+.sig div { width: 42%; border-top: 1px solid #333; padding-top: 4pt; text-align: center; }
+.small { font-size: 8.5pt; color: #444; }
 </style>
 </head>
 <body>
