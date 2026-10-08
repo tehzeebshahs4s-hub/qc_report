@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/>
+<title>Software Quality Assurance Report - CampusPool</title>
+<style>
+@page { size: A4; margin: 10mm 9mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI','Helvetica Neue',Arial,sans-serif; margin:0; color:#1c2430; font-size:9.5pt; line-height:1.3; }
+.cover { break-after: page; height: 277mm; position:relative; color:#fff; background:linear-gradient(145deg,#0b2740 0%,#123a5c 45%,#0d5c7a 100%); padding:20mm 16mm; overflow:hidden; }
+.cover .orn { position:absolute; top:-20mm; right:-20mm; width:100mm; height:100mm; background:radial-gradient(circle,rgba(255,200,87,.4),transparent 65%); border-radius:50%; }
+.cover .orn2 { position:absolute; bottom:-25mm; left:-25mm; width:90mm; height:90mm; background:radial-gradient(circle,rgba(72,209,196,.3),transparent 65%); border-radius:50%; }
+.cover .brand { font-size:10pt; letter-spacing:3px; text-transform:uppercase; color:#7fd4ff; margin-bottom:10mm; font-weight:600; position:relative; }
+.cover h1 { font-size:28pt; line-height:1.15; margin:0 0 4mm; font-weight:800; position:relative; }
+.cover h2 { font-size:15pt; font-weight:600; margin:0 0 2mm; color:#ffd479; position:relative; }
+.cover .tag { font-size:11pt; color:#cfe8f7; margin-bottom:8mm; position:relative; }
+.cover .rule { width:35mm; height:3px; background:#ffd479; margin:5mm 0 7mm; position:relative; }
+.cover table { border-collapse:collapse; width:100%; font-size:10pt; position:relative; }
+.cover th, .cover td { border:1px solid rgba(255,255,255,.25); padding:6pt 8pt; text-align:left; }
+.cover th { width:34%; background:rgba(255,255,255,.12); font-weight:600; }
+.cover .stats { display:flex; gap:6mm; margin-top:8mm; position:relative; }
+.cover .stat { background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); border-radius:6px; padding:3.5mm 4.5mm; min-width:26mm; }
+.cover .stat .n { font-size:18pt; font-weight:800; color:#ffd479; }
+.cover .stat .l { font-size:8.5pt; color:#cfe8f7; }
+.cover .foot { position:absolute; bottom:12mm; left:16mm; right:16mm; font-size:8.5pt; color:#b7d7ea; }
+h2.sec { color:#0b2740; font-size:12pt; border-bottom:2.5px solid #0d5c7a; padding-bottom:1.5mm; margin:3.5mm 0 2mm; break-after:avoid; }
+h3 { color:#123a5c; font-size:10pt; margin:2.5mm 0 1mm; break-after:avoid; }
+table.data { border-collapse:collapse; width:100%; font-size:8pt; margin:1.5mm 0 3mm; }
+table.data th, table.data td { border:1px solid #c5d0da; padding:2pt 3pt; vertical-align:top; }
+table.data th { background:#e8f1f7; color:#0b2740; text-align:left; font-weight:600; }
+table.data tr:nth-child(even) td { background:#f7fafc; }
+.badge { display:inline-block; padding:0.5pt 6pt; border-radius:3px; font-weight:700; font-size:8pt; color:#fff; }
+.sev-critical { background:#9b1c1c; }
+.sev-high { background:#c2410c; }
+.sev-medium { background:#b45309; }
+.sev-low { background:#1d4ed8; }
+.toc a { color:#0b2740; text-decoration:none; font-weight:600; }
+.toc li { margin:1pt 0; font-size:9pt; }
+.card { border:1px solid #d0dbe5; border-left:4px solid #94a3b8; border-radius:3px; padding:2mm 2.5mm; margin:0 0 2mm; break-inside:avoid; background:#fff; }
+.card.sev-critical { border-left-color:#9b1c1c; background:#fffafa; }
+.card.sev-high { border-left-color:#c2410c; background:#fffaf5; }
+.card-top { display:flex; gap:2.5mm; align-items:center; margin-bottom:0.8mm; }
+.cid { font-weight:700; color:#0b2740; font-size:8.5pt; }
+.prio { margin-left:auto; font-size:7.5pt; color:#64748b; }
+.ctitle { font-size:10pt; font-weight:700; color:#111827; margin:0 0 1mm; }
+table.kv { border-collapse:collapse; width:100%; font-size:7.5pt; }
+table.kv th { width:20%; background:#f1f5f9; color:#0b2740; text-align:left; font-weight:600; padding:1.5pt 2.5pt; border:1px solid #e2e8f0; }
+table.kv td { padding:1.5pt 2.5pt; border:1px solid #e2e8f0; vertical-align:top; }
+td.ok { background:#f0fdf4; }
+td.bad { background:#fef2f2; font-family:Consolas,monospace; font-size:7pt; }
+.shot { margin:1mm 0 0; }
+.shot img { max-width:100%; max-height:130px; border:1px solid #cbd5e1; border-radius:2px; }
+.cap { font-size:7pt; color:#64748b; }
+.ev { font-size:7.5pt; color:#64748b; font-style:italic; margin:0.5mm 0; }
+code { font-family:Consolas,monospace; font-size:7pt; background:#f1f5f9; padding:0 2pt; }
+.grid { display:flex; flex-wrap:wrap; gap:2.5mm; margin:1.5mm 0 3mm; }
+.gcard { flex:1; min-width:20mm; border:1px solid #d0dbe5; border-radius:4px; padding:2mm; text-align:center; background:linear-gradient(180deg,#f8fafc,#eef6fb); }
+.gcard .n { font-size:15pt; font-weight:800; color:#0b2740; }
+.gcard .l { font-size:7.5pt; color:#475569; }
+.pagebreak { break-before:page; }
+.tech-list { columns:2; font-size:7pt; margin:0; padding-left:3.5mm; }
+.tech-list li { margin:0 0 0.4mm; break-inside:avoid; }
+.link-list { font-size:7pt; margin:0; padding-left:3.5mm; }
+.link-list li { margin:0 0 0.8mm; word-break:break-all; }
+.feat ul { margin:0 0 1.5mm; padding-left:3.5mm; font-size:8pt; }
+.sig { margin-top:14mm; display:flex; justify-content:space-between; font-size:9.5pt; }
+.sig div { width:42%; border-top:1px solid #334155; padding-top:2mm; text-align:center; }
+.small { font-size:8pt; color:#475569; }
+.lead { font-size:9.5pt; margin:1.5mm 0; }
+</style></head><body>
+
+<div class="cover">
+  <div class="orn"></div><div class="orn2"></div>
+  <div class="brand">University of Karachi</div>
+  <h1>SOFTWARE QUALITY<br/>ASSURANCE REPORT</h1>
+  <h2>CampusPool</h2>
+  <div class="tag">Inter-Collegiate &amp; University Carpool Finder (Karachi)</div>
+  <div class="rule"></div>
+  <table>
+    <tr><th>Student</th><td>Tehzeeb</td></tr>
+    <tr><th>University</th><td>University of Karachi</td></tr>
+    <tr><th>Level / Semester</th><td>3rd Year, 6th Semester</td></tr>
+    <tr><th>Seat Number</th><td>B23110106073</td></tr>
+    <tr><th>Subject</th><td>SQET/ST (Software Quality Engineering &amp; Testing)</td></tr>
+    <tr><th>Course Head</th><td>Hussain Saleem</td></tr>
+    <tr><th>Application</th><td>CampusPool — https://carpool.33.jugaar.ai</td></tr>
+    <tr><th>Report Date</th><td>8 October 2026</td></tr>
+    <tr><th>Submission</th><td>Online 10 October 2026 · On-site 12 October 2026</td></tr>
+  </table>
+  <div class="stats">
+    <div class="stat"><div class="n">84</div><div class="l">Findings</div></div>
+    <div class="stat"><div class="n">25</div><div class="l">Critical+High</div></div>
+    <div class="stat"><div class="n">133</div><div class="l">Techniques</div></div>
+  </div>
+  <div class="foot">Individual QA campaign · Functional · UI/UX · Security · Performance · Compatibility · Print-ready A4</div>
+</div>
+
+<h2 class="sec">Contents</h2>
+<ol class="toc">
+  <li><a href="#s1">Executive Summary</a></li>
+  <li><a href="#s2">Test Environment</a></li>
+  <li><a href="#s3">Quality Dashboard</a></li>
+  <li><a href="#s4">Priority Findings (Critical &amp; High)</a></li>
+  <li><a href="#s5">Additional Findings (Medium &amp; Low)</a></li>
+  <li><a href="#sA">Appendix A — Feature List</a></li>
+  <li><a href="#sB">Appendix B — Tools</a></li>
+  <li><a href="#sC">Appendix C — 133 Techniques</a></li>
+  <li><a href="#sD">Appendix D — References (52)</a></li>
+  <li><a href="#sE">Appendix E — Methodology</a></li>
+</ol>
+
+<h2 class="sec" id="s1">1. Executive Summary</h2>
+<p class="lead">This report presents the results of an individual <strong>Software Quality Assurance</strong> campaign against
+<strong>CampusPool</strong> (https://carpool.33.jugaar.ai), a university carpool platform for Karachi students.
+Testing covered the live production deployment using black-box, grey-box and white-box approaches,
+supported by source-code review and automated evidence capture.</p>
+<p class="lead"><strong>84 quality findings</strong> were documented:
+1 Critical · 24 High · 52 Medium · 7 Low.
+The campaign applied <strong>133 distinct testing techniques</strong> (requirement: 100+),
+including functional, UI/UX, accessibility, responsiveness, cross-browser, performance, API, security, reliability and exploratory methods.
+Findings follow a standard defect-report template: ID, Severity/Priority, Environment, Steps, Oracle, Actual, Evidence, Impact —
+with techniques listed on each finding.</p>
+<p class="small"><strong>Priority themes:</strong> simulated payment gateway shown as success · fake student verification · public driver phone exposure ·
+ride cancel without booking cascade · seat-inventory corruption on double-cancel · passenger self-confirm · ignored search filters ·
+database wipe on restart · stored XSS / encoding pollution · mock-only marketing pages.</p>
+
+<h2 class="sec" id="s2">2. Test Environment</h2>
+<table class="data">
+  <tr><th style="width:26%">Parameter</th><th>Detail</th></tr>
+  <tr><td>Application</td><td>CampusPool — Inter-Collegiate &amp; University Carpool Finder (Karachi)</td></tr>
+  <tr><td>URL / API</td><td>https://carpool.33.jugaar.ai · https://carpool.33.jugaar.ai/api</td></tr>
+  <tr><td>Stack</td><td>React 18 + Vite + Tailwind · Express + Sequelize · JWT · Caddy + PM2</td></tr>
+  <tr><td>Source</td><td>/root/campuspool</td></tr>
+  <tr><td>OS / Browsers</td><td>Ubuntu 24.04 LTS · Chrome/Chromium 131 (Playwright), Firefox, WebKit</td></tr>
+  <tr><td>Viewports</td><td>1440x900 · 375x667 · 390x844 · 360x740 · 768x1024 · 1024x768</td></tr>
+  <tr><td>TZ / Network / DB</td><td>Asia/Karachi (UTC+5) · Production HTTPS (Caddy) · SQLite/Sequelize (PM2 :5001)</td></tr>
+  <tr><td>Demo accounts</td><td>ahmed@nu.edu.pk/test123 · fatima@iobm.edu.pk/test123 · usman@szabist.edu.pk/test123</td></tr>
+  <tr><td>Reporter</td><td>Tehzeeb · B23110106073 · University of Karachi</td></tr>
+  <tr><td>Report date</td><td>8 October 2026</td></tr>
+</table>
+
+<h2 class="sec" id="s3">3. Quality Dashboard</h2>
+<div class="grid">
+  <div class="gcard"><div class="n">84</div><div class="l">Total findings</div></div>
+  <div class="gcard"><div class="n">1</div><div class="l">Critical</div></div>
+  <div class="gcard"><div class="n">24</div><div class="l">High</div></div>
+  <div class="gcard"><div class="n">52</div><div class="l">Medium</div></div>
+  <div class="gcard"><div class="n">7</div><div class="l">Low</div></div>
+  <div class="gcard"><div class="n">133</div><div class="l">Techniques</div></div>
+</div>
+<table class="data">
+  <tr><th>Source</th><th>Count</th><th>Description</th></tr>
+  <tr><td>Live API / HTTP</td><td>43</td><td>Production API testing with response evidence</td></tr>
+  <tr><td>UI / browser</td><td>21</td><td>Playwright journeys + screenshots</td></tr>
+  <tr><td>Code / static</td><td>20</td><td>White-box review of controllers, models, configs</td></tr>
+</table>
+<table class="data">
+  <tr><th>ID</th><th>Severity</th><th>Priority</th><th>Title</th></tr>
+<tr><td>API-094</td><td><span class='badge sev-critical'>Critical</span></td><td>P1 - Immediate</td><td>F-01: sequelize.sync({force:true}) on every server start wipes DB</td></tr><tr><td>API-006</td><td><span class='badge sev-high'>High</span></td><td>P2 - Current release</td><td>F-02: XSS payload in fullName during registration</td></tr><tr><td>API-007</td><td><span class='badge sev-high'>High</span></td><td>P2 - Current release</td><td>F-03: Stored XSS payload in profile response</td></tr><tr><td>API-020</td><td><span class='badge sev-high'>High</span></td><td>P2 - Current release</td><td>F-04: Create ride with past departure time accepted</td></tr><tr><td>API-022</td><td><span class='badge sev-high'>High</span></td><td>P2 - Current release</td><td>F-05: XSS payload in ride notes</td></tr><tr><td>API-043</td><td><span class='badge sev-high'>High</span></td><td>P2 - Current release</td><td>F-06: Ride update mass-assignment (status/driverId/availableSeats)</td></tr><tr><td>API-044</td><td><span class='badge sev-high'>High</span></td><td>P2 - Current release</td><td>F-07: Ride state after mass-assignment update</td></tr><tr><td>API-047</td><td><span class='badge sev-high'>High</span></td><td>P2 - Current release</td><td>F-08: Driver cancels ride with active bookings</td></tr><tr><td>API-048</td><td><span class='badge sev-high'>High</span></td><td>P2 - Current release</td><td>F-09: Passenger booking status after ride cancel</td></tr><tr><td>API-054</td><td><span class='badge sev-high'>High</span></td><td>P2 - Current release</td><td>F-10: Rating/review workflow unreachable - no completed-ride path</td></tr><tr><td>API-061</td><td><span class='badge sev-high'>High</span></td><td>P2 - Current release</td><td>F-11: XSS in message content</td></tr><tr><td>API-074</td><td><span class='badge sev-high'>High</span></td><td>P2 - Current release</td><td>F-12: Unauthenticated ride detail exposes driver phone</td></tr><tr><td>API-080</td><td><span class='badge sev-high'>High</span></td><td>P2 - Current release</td><td>F-13: Student verification without real check — arbitrary CNIC accepted</td></tr><tr><td>API-081</td><td><span class='badge sev-high'>High</span></td><td>P2 - Current release</td><td>F-14: Verify with garbage CNIC accepted</td></tr><tr><td>API-084</td><td><span class='badge sev-high'>High</span></td><td>P2 - Current release</td><td>F-15: Double-cancel booking inflates seats</td></tr><tr><td>API-085</td><td><span class='badge sev-high'>High</span></td><td>P2 - Current release</td><td>F-16: Passenger self-confirms own booking</td></tr><tr><td>API-091</td><td><span class='badge sev-high'>High</span></td><td>P2 - Current release</td><td>F-17: Review rating bounds unvalidated (latent) - rating=99 rejected only by workflow gate</td></tr><tr><td>API-095</td><td><span class='badge sev-high'>High</span></td><td>P2 - Current release</td><td>F-18: Payment gateway fully simulated — no real JazzCash/EasyPaisa/bank</td></tr><tr><td>CR-01</td><td><span class='badge sev-high'>High</span></td><td>P2 - Current release</td><td>F-19: Hardcoded JWT secrets committed to repository</td></tr><tr><td>CR-09</td><td><span class='badge sev-high'>High</span></td><td>P2 - Current release</td><td>F-20: Sanitize middleware stores HTML-encoded data (double-encoding)</td></tr><tr><td>CR-12</td><td><span class='badge sev-high'>High</span></td><td>P2 - Current release</td><td>F-21: JWT in localStorage with no server-side revocation</td></tr><tr><td>UI-006</td><td><span class='badge sev-high'>High</span></td><td>P2 - Current release</td><td>F-22: Search free-text filter ignored — unrelated rides returned</td></tr><tr><td>UI-007</td><td><span class='badge sev-high'>High</span></td><td>P2 - Current release</td><td>F-23: Ride details exposes driver phone publicly</td></tr><tr><td>UI-015</td><td><span class='badge sev-high'>High</span></td><td>P2 - Current release</td><td>F-24: Student verification fake — hardcoded CNIC / no real check</td></tr><tr><td>UI-027</td><td><span class='badge sev-high'>High</span></td><td>P2 - Current release</td><td>F-25: Create Ride past date + 0 seats submit</td></tr><tr><td>API-016</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-26: Create ride 0 seats - generic error message (validation hidden)</td></tr><tr><td>API-017</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-27: Create ride negative seats - generic error message</td></tr><tr><td>API-018</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-28: Create ride negative price - generic error message</td></tr><tr><td>API-019</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-29: Create ride with 0 price</td></tr><tr><td>API-021</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-30: Create ride seats&gt;7 - generic error message</td></tr><tr><td>API-024</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-31: Search by free-text origin/destination ignored — returns unrelated rides</td></tr><tr><td>API-026</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-32: Search limit=999999 resource abuse</td></tr><tr><td>API-029</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-33: Book ride 0 seats - generic Failed to create booking message</td></tr><tr><td>API-031</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-34: Book ride negative seats - generic error message (validation hidden)</td></tr><tr><td>API-038</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-35: Booking creation fails with opaque generic errors</td></tr><tr><td>API-050</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-36: Payment with unlisted method accepted</td></tr><tr><td>API-060</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-37: Send empty message content</td></tr><tr><td>API-065</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-38: Fetch other user&#x27;s profile by ID (PII exposure)</td></tr><tr><td>API-076</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-39: Profile update attempts email change (ignored silently)</td></tr><tr><td>API-077</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-40: Profile update attempts password change via profile (ignored)</td></tr><tr><td>API-079</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-41: Profile update invalid phone</td></tr><tr><td>API-087</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-42: Driver marks booking completed while ride still active</td></tr><tr><td>API-089</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-43: Duplicate review prevention not reachable/unverified</td></tr><tr><td>API-090</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-44: Review rating bounds unvalidated when review path opens</td></tr><tr><td>API-093</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-45: User search endpoint broken</td></tr><tr><td>API-097</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-46: CORS allowlist includes raw IP origins (67.215.237.229)</td></tr><tr><td>API-098</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-47: JWT expiry 7 days + localStorage + no server revoke</td></tr><tr><td>API-099</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-48: Forgot password feature completely missing (UI link dead + no API)</td></tr><tr><td>CR-02</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-49: No admin/moderation pages despite feature claims</td></tr><tr><td>CR-03</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-50: Recurring rides stored but never expanded into actual rides</td></tr><tr><td>CR-04</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-51: No automated test suite in repository</td></tr><tr><td>CR-05</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-52: Broken deploy configs (Procfile / render.yaml)</td></tr><tr><td>CR-07</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-53: Demo credentials printed by start.sh in cleartext</td></tr><tr><td>CR-08</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-54: No email verification / SMTP integration</td></tr><tr><td>CR-10</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-55: Generic error messages hide field-level validation failures</td></tr><tr><td>CR-11</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-56: User search API endpoint broken</td></tr><tr><td>CR-13</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-57: DataTypes.ARRAY may break on SQLite dialect</td></tr><tr><td>CR-14</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-58: Seat booking race condition (no transaction/atomic decrement)</td></tr><tr><td>CR-16</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-59: Public ride detail exposes driver phone</td></tr><tr><td>CR-17</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-60: Profile update silently ignores empty/fullName edge cases</td></tr><tr><td>CR-19</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-61: Rate limiting missing on reviews/messages/safety/impact/users</td></tr><tr><td>CR-20</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-62: Impact/Emergency/PublicProfile pages use mock data only</td></tr><tr><td>UI-001</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-63: &#x27;Forgot password&#x27; dead link</td></tr><tr><td>UI-008</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-64: Premium page — mock/hardcoded data (no real API)</td></tr><tr><td>UI-009</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-65: Earnings page — mock/hardcoded data (no real API)</td></tr><tr><td>UI-010</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-66: Achievements page — mock/hardcoded data (no real API)</td></tr><tr><td>UI-011</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-67: Smart Match page — mock/hardcoded data (no real API)</td></tr><tr><td>UI-012</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-68: Marketplace page — mock/hardcoded data (no real API)</td></tr><tr><td>UI-013</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-69: Sponsored page — mock/hardcoded data (no real API)</td></tr><tr><td>UI-014</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-70: Cities page — mock/hardcoded data (no real API)</td></tr><tr><td>UI-026</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-71: Create Ride empty submit validation</td></tr><tr><td>UI-028</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-72: Responsive iphone_se 375x667 horizontal overflow</td></tr><tr><td>UI-029</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-73: Responsive iphone_14 390x844 horizontal overflow</td></tr><tr><td>UI-030</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-74: Responsive galaxy_s 360x740 horizontal overflow</td></tr><tr><td>UI-032</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-75: Responsive desktop_small 1024x768 horizontal overflow</td></tr><tr><td>UI-036</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-76: Accessibility spot-check home</td></tr><tr><td>UI-037</td><td><span class='badge sev-medium'>Medium</span></td><td>P3 - Next iteration</td><td>F-77: Accessibility spot-check search</td></tr><tr><td>API-025</td><td><span class='badge sev-low'>Low</span></td><td>P4 - Backlog</td><td>F-78: Search minSeats=-10 unvalidated</td></tr><tr><td>API-027</td><td><span class='badge sev-low'>Low</span></td><td>P4 - Backlog</td><td>F-79: Search with invalid departureDate</td></tr><tr><td>CR-06</td><td><span class='badge sev-low'>Low</span></td><td>P4 - Backlog</td><td>F-80: PORT inconsistency (5000 vs 5001 defaults)</td></tr><tr><td>CR-15</td><td><span class='badge sev-low'>Low</span></td><td>P4 - Backlog</td><td>F-81: Real-time chat is polling only (30s interval)</td></tr><tr><td>CR-18</td><td><span class='badge sev-low'>Low</span></td><td>P4 - Backlog</td><td>F-82: README claims unimplemented features (notifications, maps, admin)</td></tr><tr><td>UI-002</td><td><span class='badge sev-low'>Low</span></td><td>P4 - Backlog</td><td>F-83: &#x27;Remember me&#x27; checkbox cosmetic / non-functional</td></tr><tr><td>UI-035</td><td><span class='badge sev-low'>Low</span></td><td>P4 - Backlog</td><td>F-84: Unknown route handling (404)</td></tr></table>
+<div class="pagebreak" id="s4"></div>
+<h2 class="sec">4. Priority Findings — Critical &amp; High (25)</h2>
+<p class="small">Compact evidence cards in standard defect-report format (ID, severity, steps, oracle, actual, impact, techniques).</p>
+<div class="card sev-critical">
+  <div class="card-top"><span class="badge sev-critical">Critical</span><span class="cid">API-094</span><span class="prio">P1 - Immediate</span></div>
+  <div class="ctitle">F-01: sequelize.sync({force:true}) on every server start wipes DB</div>
+  <table class="kv">
+    <tr><th>Category</th><td>Reliability / Data integrity</td></tr>
+    <tr><th>Module</th><td>CampusPool - https://carpool.33.jugaar.ai</td></tr>
+    <tr><th>Steps</th><td><code>https://carpool.33.jugaar.ai/api</code> → <code>backend/src/index.ts:107 sequelize.sync({ force: true })</code></td></tr>
+    <tr><th>Expected (Oracle)</th><td class="ok">Every backend restart deletes all users, rides, bookings, messages; reseeds 3 demo users</td></tr>
+    <tr><th>Actual</th><td class="bad">Use migrations / sync({force:false}); never drop data on boot</td></tr>
+    <tr><th>Notes</th><td>Data loss is a release-blocking reliability defect</td></tr>
+    <tr><th>Techniques</th><td>Static analysis, code review, Reliability, Data integrity, Reliability testing, Data integrity testing</td></tr>
+    <tr><th>Impact</th><td>Release-blocking: data loss or complete workflow failure. Fix before any deploy.</td></tr>
+  </table>
+  <div class='ev'>Evidence: API response JSON captured in test script.</div>
+</div><div class="card sev-high">
+  <div class="card-top"><span class="badge sev-high">High</span><span class="cid">API-006</span><span class="prio">P2 - Current release</span></div>
+  <div class="ctitle">F-02: XSS payload in fullName during registration</div>
+  <table class="kv">
+    <tr><th>Category</th><td>Security</td></tr>
+    <tr><th>Module</th><td>CampusPool - https://carpool.33.jugaar.ai</td></tr>
+    <tr><th>Steps</th><td><code>https://carpool.33.jugaar.ai/api</code> → <code>POST /auth/register fullName=&lt;script&gt;alert(1)&lt;/script&gt;</code></td></tr>
+    <tr><th>Expected (Oracle)</th><td class="ok">Input must be safely stored/rendered</td></tr>
+    <tr><th>Actual</th><td class="bad">{&quot;success&quot;: true, &quot;message&quot;: &quot;Registration successful&quot;, &quot;data&quot;: {&quot;user&quot;: {&quot;id&quot;: &quot;e213e7d8-f2d6-464b-a8dd-6e4728ad76f0&quot;, &quot;email&quot;: &quot;xss.021c10e3@uok.edu.pk&quot;, &quot;fullName&quot;: &quot;&amp;lt;script&amp;gt;alert(&amp;#x27;xss&amp;#x27;)&amp;lt;/script&amp;gt;&quot;, &quot;phone&quot;: &quot;+923001112233&quot;, &quot;university&quot;: &quot;UoK&quot;, &quot;isVerified&quot;: false, &quot;isDriver&quot;: false, &quot;rating&quot;: 0}, &quot;token&quot;: &quot;eyJhbGciOiJIUzI1NiIsInR5cC</td></tr>
+    
+    <tr><th>Techniques</th><td>Security testing (XSS, input validation), Security, Security testing, Authorization testing</td></tr>
+    <tr><th>Impact</th><td>Serious functional/security defect harming users, privacy, or business data.</td></tr>
+  </table>
+  <div class='ev'>Evidence: API response JSON captured in test script.</div>
+</div><div class="card sev-high">
+  <div class="card-top"><span class="badge sev-high">High</span><span class="cid">API-007</span><span class="prio">P2 - Current release</span></div>
+  <div class="ctitle">F-03: Stored XSS payload in profile response</div>
+  <table class="kv">
+    <tr><th>Category</th><td>Security</td></tr>
+    <tr><th>Module</th><td>CampusPool - https://carpool.33.jugaar.ai</td></tr>
+    <tr><th>Steps</th><td><code>https://carpool.33.jugaar.ai/api</code> → <code>GET /auth/profile after XSS register</code></td></tr>
+    <tr><th>Expected (Oracle)</th><td class="ok">Stored script tags indicate broken sanitize middleware</td></tr>
+    <tr><th>Actual</th><td class="bad">{&quot;success&quot;: true, &quot;data&quot;: {&quot;user&quot;: {&quot;id&quot;: &quot;e213e7d8-f2d6-464b-a8dd-6e4728ad76f0&quot;, &quot;email&quot;: &quot;xss.021c10e3@uok.edu.pk&quot;, &quot;fullName&quot;: &quot;&amp;lt;script&amp;gt;alert(&amp;#x27;xss&amp;#x27;)&amp;lt;/script&amp;gt;&quot;, &quot;phone&quot;: &quot;+923001112233&quot;, &quot;university&quot;: &quot;UoK&quot;, &quot;department&quot;: null, &quot;yearOfStudy&quot;: null, &quot;profilePhoto&quot;: null, &quot;isVerified&quot;: false, &quot;isDriver&quot;: false, &quot;rating&quot;: 0, &quot;totalRides&quot;</td></tr>
+    <tr><th>Notes</th><td>raw fullName stored as: &quot;&amp;lt;script&amp;gt;alert(&amp;#x27;xss&amp;#x27;)&amp;lt;/script&amp;gt;&quot;</td></tr>
+    <tr><th>Techniques</th><td>Security testing (XSS), Security, Security testing, Authorization testing</td></tr>
+    <tr><th>Impact</th><td>Serious functional/security defect harming users, privacy, or business data.</td></tr>
+  </table>
+  <div class='ev'>Evidence: API response JSON captured in test script.</div>
+</div><div class="card sev-high">
+  <div class="card-top"><span class="badge sev-high">High</span><span class="cid">API-020</span><span class="prio">P2 - Current release</span></div>
+  <div class="ctitle">F-04: Create ride with past departure time accepted</div>
+  <table class="kv">
+    <tr><th>Category</th><td>Validation</td></tr>
+    <tr><th>Module</th><td>CampusPool - https://carpool.33.jugaar.ai</td></tr>
+    <tr><th>Steps</th><td><code>https://carpool.33.jugaar.ai/api</code> → <code>POST /rides departureTime in past</code></td></tr>
+    <tr><th>Expected (Oracle)</th><td class="ok">Past departures must not be created as active future rides</td></tr>
+    <tr><th>Actual</th><td class="bad">{&quot;success&quot;: true, &quot;message&quot;: &quot;Ride created successfully&quot;, &quot;data&quot;: {&quot;ride&quot;: {&quot;id&quot;: &quot;a52e523c-45c6-4dfa-877d-d1da89e31470&quot;, &quot;status&quot;: &quot;active&quot;, &quot;driverId&quot;: &quot;1a66017f-f150-48f3-91cb-1a2b106fa94b&quot;, &quot;originLat&quot;: 24.9206, &quot;originLng&quot;: 67.0655, &quot;originName&quot;: &quot;North Nazimabad Block D&quot;, &quot;destinationLat&quot;: 24.8157, &quot;destinationLng&quot;: 67.0685, &quot;destinationName&quot;: &quot;FAST-NU</td></tr>
+    
+    <tr><th>Techniques</th><td>State transition, business rules, Validation, Boundary value analysis, Equivalence partitioning</td></tr>
+    <tr><th>Impact</th><td>Serious functional/security defect harming users, privacy, or business data.</td></tr>
+  </table>
+  <div class='ev'>Evidence: API response JSON captured in test script.</div>
+</div><div class="card sev-high">
+  <div class="card-top"><span class="badge sev-high">High</span><span class="cid">API-022</span><span class="prio">P2 - Current release</span></div>
+  <div class="ctitle">F-05: XSS payload in ride notes</div>
+  <table class="kv">
+    <tr><th>Category</th><td>Security</td></tr>
+    <tr><th>Module</th><td>CampusPool - https://carpool.33.jugaar.ai</td></tr>
+    <tr><th>Steps</th><td><code>https://carpool.33.jugaar.ai/api</code> → <code>POST /rides notes=&lt;img onerror=...&gt;</code></td></tr>
+    <tr><th>Expected (Oracle)</th><td class="ok">Notes must not store executable HTML raw</td></tr>
+    <tr><th>Actual</th><td class="bad">{&quot;success&quot;: true, &quot;message&quot;: &quot;Ride created successfully&quot;, &quot;data&quot;: {&quot;ride&quot;: {&quot;id&quot;: &quot;f11377c9-1033-4f4b-82fa-dafe3a3a22e0&quot;, &quot;status&quot;: &quot;active&quot;, &quot;driverId&quot;: &quot;1a66017f-f150-48f3-91cb-1a2b106fa94b&quot;, &quot;originLat&quot;: 24.9206, &quot;originLng&quot;: 67.0655, &quot;originName&quot;: &quot;North Nazimabad Block D&quot;, &quot;destinationLat&quot;: 24.8157, &quot;destinationLng&quot;: 67.0685, &quot;destinationName&quot;: &quot;FAST-NU</td></tr>
+    
+    <tr><th>Techniques</th><td>Security testing (XSS), Security, Security testing, Authorization testing</td></tr>
+    <tr><th>Impact</th><td>Serious functional/security defect harming users, privacy, or business data.</td></tr>
+  </table>
+  <div class='ev'>Evidence: API response JSON captured in test script.</div>
+</div><div class="card sev-high">
+  <div class="card-top"><span class="badge sev-high">High</span><span class="cid">API-043</span><span class="prio">P2 - Current release</span></div>
+  <div class="ctitle">F-06: Ride update mass-assignment (status/driverId/availableSeats)</div>
+  <table class="kv">
+    <tr><th>Category</th><td>Security</td></tr>
+    <tr><th>Module</th><td>CampusPool - https://carpool.33.jugaar.ai</td></tr>
+    <tr><th>Steps</th><td><code>https://carpool.33.jugaar.ai/api</code> → <code>PUT /rides/91c6e7c8-3f81-4f13-8f3a-98d40c2f2df5 body includes status/driverId</code></td></tr>
+    <tr><th>Expected (Oracle)</th><td class="ok">Update must whitelist fields; caller must not set arbitrary status or transfer ownership</td></tr>
+    <tr><th>Actual</th><td class="bad">{&quot;success&quot;: false, &quot;message&quot;: &quot;Failed to update ride&quot;}</td></tr>
+    
+    <tr><th>Techniques</th><td>Mass assignment testing, Security, Security testing, Authorization testing</td></tr>
+    <tr><th>Impact</th><td>Serious functional/security defect harming users, privacy, or business data.</td></tr>
+  </table>
+  <div class='ev'>Evidence: API response JSON captured in test script.</div>
+</div><div class="card sev-high">
+  <div class="card-top"><span class="badge sev-high">High</span><span class="cid">API-044</span><span class="prio">P2 - Current release</span></div>
+  <div class="ctitle">F-07: Ride state after mass-assignment update</div>
+  <table class="kv">
+    <tr><th>Category</th><td>Security</td></tr>
+    <tr><th>Module</th><td>CampusPool - https://carpool.33.jugaar.ai</td></tr>
+    <tr><th>Steps</th><td><code>https://carpool.33.jugaar.ai/api</code> → <code>GET /rides/91c6e7c8-3f81-4f13-8f3a-98d40c2f2df5</code></td></tr>
+    <tr><th>Expected (Oracle)</th><td class="ok">Verify which fields were actually persisted</td></tr>
+    <tr><th>Actual</th><td class="bad">{&quot;success&quot;: true, &quot;data&quot;: {&quot;ride&quot;: {&quot;id&quot;: &quot;91c6e7c8-3f81-4f13-8f3a-98d40c2f2df5&quot;, &quot;driverId&quot;: &quot;1a66017f-f150-48f3-91cb-1a2b106fa94b&quot;, &quot;originLat&quot;: 24.9206, &quot;originLng&quot;: 67.0655, &quot;originName&quot;: &quot;MassAssign Ride&quot;, &quot;destinationLat&quot;: 24.8157, &quot;destinationLng&quot;: 67.0685, &quot;destinationName&quot;: &quot;MassAssign Dest&quot;, &quot;departureTime&quot;: &quot;2026-10-10T09:59:21.651Z&quot;, &quot;availableSe</td></tr>
+    <tr><th>Notes</th><td>stored status=active</td></tr>
+    <tr><th>Techniques</th><td>Mass assignment testing, Security, Security testing, Authorization testing</td></tr>
+    <tr><th>Impact</th><td>Serious functional/security defect harming users, privacy, or business data.</td></tr>
+  </table>
+  <div class='ev'>Evidence: API response JSON captured in test script.</div>
+</div><div class="card sev-high">
+  <div class="card-top"><span class="badge sev-high">High</span><span class="cid">API-047</span><span class="prio">P2 - Current release</span></div>
+  <div class="ctitle">F-08: Driver cancels ride with active bookings</div>
+  <table class="kv">
+    <tr><th>Category</th><td>Business logic</td></tr>
+    <tr><th>Module</th><td>CampusPool - https://carpool.33.jugaar.ai</td></tr>
+    <tr><th>Steps</th><td><code>https://carpool.33.jugaar.ai/api</code> → <code>POST /rides/c689e47b-148e-4415-be35-6c1ac19cc201/cancel</code></td></tr>
+    <tr><th>Expected (Oracle)</th><td class="ok">Cancelling a ride must cascade: cancel bookings, restore/adjust seats, notify passengers</td></tr>
+    <tr><th>Actual</th><td class="bad">{&quot;success&quot;: true, &quot;message&quot;: &quot;Ride cancelled successfully&quot;}</td></tr>
+    
+    <tr><th>Techniques</th><td>State transition testing, Business logic, Business logic testing</td></tr>
+    <tr><th>Impact</th><td>Serious functional/security defect harming users, privacy, or business data.</td></tr>
+  </table>
+  <div class='ev'>Evidence: API response JSON captured in test script.</div>
+</div><div class="card sev-high">
+  <div class="card-top"><span class="badge sev-high">High</span><span class="cid">API-048</span><span class="prio">P2 - Current release</span></div>
+  <div class="ctitle">F-09: Passenger booking status after ride cancel</div>
+  <table class="kv">
+    <tr><th>Category</th><td>Business logic</td></tr>
+    <tr><th>Module</th><td>CampusPool - https://carpool.33.jugaar.ai</td></tr>
+    <tr><th>Steps</th><td><code>https://carpool.33.jugaar.ai/api</code> → <code>GET /bookings/my-bookings (ride c689e47b-148e-4415-be35-6c1ac19cc201)</code></td></tr>
+    <tr><th>Expected (Oracle)</th><td class="ok">Booking on cancelled ride must not stay pending/confirmed — stranded passenger</td></tr>
+    <tr><th>Actual</th><td class="bad">{&quot;success&quot;: true, &quot;data&quot;: {&quot;bookings&quot;: [{&quot;id&quot;: &quot;4be293b4-631d-4ecd-b757-b9bcc6f2dd58&quot;, &quot;rideId&quot;: &quot;c689e47b-148e-4415-be35-6c1ac19cc201&quot;, &quot;passengerId&quot;: &quot;d8424298-1bb3-490b-84f8-bfb5d878da33&quot;, &quot;seatsBooked&quot;: 2, &quot;pickupPoint&quot;: &quot;Crater&quot;, &quot;status&quot;: &quot;pending&quot;, &quot;paymentStatus&quot;: &quot;pending&quot;, &quot;amountPaid&quot;: 200, &quot;createdAt&quot;: &quot;2026-10-08T09:59:21.842Z&quot;, &quot;updatedAt&quot;: &quot;20</td></tr>
+    <tr><th>Notes</th><td>booking status after ride cancel = pending</td></tr>
+    <tr><th>Techniques</th><td>State transition testing, Business logic, Business logic testing</td></tr>
+    <tr><th>Impact</th><td>Serious functional/security defect harming users, privacy, or business data.</td></tr>
+  </table>
+  <div class='ev'>Evidence: API response JSON captured in test script.</div>
+</div><div class="card sev-high">
+  <div class="card-top"><span class="badge sev-high">High</span><span class="cid">API-054</span><span class="prio">P2 - Current release</span></div>
+  <div class="ctitle">F-10: Rating/review workflow unreachable - no completed-ride path</div>
+  <table class="kv">
+    <tr><th>Category</th><td>Business logic</td></tr>
+    <tr><th>Module</th><td>CampusPool - https://carpool.33.jugaar.ai</td></tr>
+    <tr><th>Steps</th><td><code>https://carpool.33.jugaar.ai/api</code> → <code>POST /reviews without booking</code></td></tr>
+    <tr><th>Expected (Oracle)</th><td class="ok">Only passengers who completed a ride may review</td></tr>
+    <tr><th>Actual</th><td class="bad">{&quot;success&quot;: false, &quot;message&quot;: &quot;Can only review completed rides&quot;}</td></tr>
+    <tr><th>Notes</th><td>Driver can cancel ride but no complete-ride flow exists; reviews always blocked with &#x27;Can only review completed rides&#x27;.</td></tr>
+    <tr><th>Techniques</th><td>Business rules testing, Business logic, State transition testing, Business logic testing</td></tr>
+    <tr><th>Impact</th><td>Serious functional/security defect harming users, privacy, or business data.</td></tr>
+  </table>
+  <div class='ev'>Evidence: API response JSON captured in test script.</div>
+</div><div class="card sev-high">
+  <div class="card-top"><span class="badge sev-high">High</span><span class="cid">API-061</span><span class="prio">P2 - Current release</span></div>
+  <div class="ctitle">F-11: XSS in message content</div>
+  <table class="kv">
+    <tr><th>Category</th><td>Security</td></tr>
+    <tr><th>Module</th><td>CampusPool - https://carpool.33.jugaar.ai</td></tr>
+    <tr><th>Steps</th><td><code>https://carpool.33.jugaar.ai/api</code> → <code>POST /messages content=&lt;script&gt;</code></td></tr>
+    <tr><th>Expected (Oracle)</th><td class="ok">Message content must be safely stored</td></tr>
+    <tr><th>Actual</th><td class="bad">{&quot;success&quot;: true, &quot;message&quot;: &quot;Message sent successfully&quot;, &quot;data&quot;: {&quot;message&quot;: {&quot;id&quot;: &quot;6d25918e-0049-4a1b-bdbb-f776d5f1e6d5&quot;, &quot;isRead&quot;: false, &quot;senderId&quot;: &quot;d8424298-1bb3-490b-84f8-bfb5d878da33&quot;, &quot;receiverId&quot;: &quot;19b3d7ed-bc44-4ab4-93c9-412650d73a3d&quot;, &quot;content&quot;: &quot;&amp;lt;script&amp;gt;alert(&amp;#x27;msg&amp;#x27;)&amp;lt;/script&amp;gt;&quot;, &quot;updatedAt&quot;: &quot;2026-10-08T09:59:22.310Z&quot;, &quot;crea</td></tr>
+    
+    <tr><th>Techniques</th><td>Security testing (XSS), Security, Security testing, Authorization testing</td></tr>
+    <tr><th>Impact</th><td>Serious functional/security defect harming users, privacy, or business data.</td></tr>
+  </table>
+  <div class='ev'>Evidence: API response JSON captured in test script.</div>
+</div><div class="card sev-high">
+  <div class="card-top"><span class="badge sev-high">High</span><span class="cid">API-074</span><span class="prio">P2 - Current release</span></div>
+  <div class="ctitle">F-12: Unauthenticated ride detail exposes driver phone</div>
+  <table class="kv">
+    <tr><th>Category</th><td>Security</td></tr>
+    <tr><th>Module</th><td>CampusPool - https://carpool.33.jugaar.ai</td></tr>
+    <tr><th>Steps</th><td><code>https://carpool.33.jugaar.ai/api</code> → <code>GET /rides/91c6e7c8-3f81-4f13-8f3a-98d40c2f2df5 no auth</code></td></tr>
+    <tr><th>Expected (Oracle)</th><td class="ok">Driver phone must not be exposed to unauthenticated users</td></tr>
+    <tr><th>Actual</th><td class="bad">{&quot;success&quot;: true, &quot;data&quot;: {&quot;ride&quot;: {&quot;id&quot;: &quot;91c6e7c8-3f81-4f13-8f3a-98d40c2f2df5&quot;, &quot;driverId&quot;: &quot;1a66017f-f150-48f3-91cb-1a2b106fa94b&quot;, &quot;originLat&quot;: 24.9206, &quot;originLng&quot;: 67.0655, &quot;originName&quot;: &quot;MassAssign Ride&quot;, &quot;destinationLat&quot;: 24.8157, &quot;destinationLng&quot;: 67.0685, &quot;destinationName&quot;: &quot;MassAssign Dest&quot;, &quot;departureTime&quot;: &quot;2026-10-10T09:59:21.651Z&quot;, &quot;availableSe</td></tr>
+    <tr><th>Notes</th><td>phone exposed = +923009001101</td></tr>
+    <tr><th>Techniques</th><td>Privacy, data exposure testing, Security, Security testing, Authorization testing</td></tr>
+    <tr><th>Impact</th><td>Serious functional/security defect harming users, privacy, or business data.</td></tr>
+  </table>
+  <div class='ev'>Evidence: API response JSON captured in test script.</div>
+</div><div class="card sev-high">
+  <div class="card-top"><span class="badge sev-high">High</span><span class="cid">API-080</span><span class="prio">P2 - Current release</span></div>
+  <div class="ctitle">F-13: Student verification without real check — arbitrary CNIC accepted</div>
+  <table class="kv">
+    <tr><th>Category</th><td>Security / Functional</td></tr>
+    <tr><th>Module</th><td>CampusPool - https://carpool.33.jugaar.ai</td></tr>
+    <tr><th>Steps</th><td><code>https://carpool.33.jugaar.ai/api</code> → <code>POST /auth/verify cnicNumber=00000-0000000-0</code></td></tr>
+    <tr><th>Expected (Oracle)</th><td class="ok">Verification must validate CNIC format and/or require proof</td></tr>
+    <tr><th>Actual</th><td class="bad">{&quot;success&quot;:true,&quot;message&quot;:&quot;Student verification submitted&quot;,&quot;data&quot;:{&quot;isVerified&quot;:true}}</td></tr>
+    <tr><th>Notes</th><td>isVerified=true granted with no validation — fake trust badge</td></tr>
+    <tr><th>Techniques</th><td>Security testing, functional, Security, Authorization testing</td></tr>
+    <tr><th>Impact</th><td>Serious functional/security defect harming users, privacy, or business data.</td></tr>
+  </table>
+  <div class='ev'>Evidence: API response JSON captured in test script.</div>
+</div><div class="card sev-high">
+  <div class="card-top"><span class="badge sev-high">High</span><span class="cid">API-081</span><span class="prio">P2 - Current release</span></div>
+  <div class="ctitle">F-14: Verify with garbage CNIC accepted</div>
+  <table class="kv">
+    <tr><th>Category</th><td>Security / Validation</td></tr>
+    <tr><th>Module</th><td>CampusPool - https://carpool.33.jugaar.ai</td></tr>
+    <tr><th>Steps</th><td><code>https://carpool.33.jugaar.ai/api</code> → <code>POST /auth/verify cnicNumber=abc</code></td></tr>
+    <tr><th>Expected (Oracle)</th><td class="ok">Garbage CNIC must be rejected</td></tr>
+    <tr><th>Actual</th><td class="bad">{&quot;success&quot;:true,&quot;message&quot;:&quot;Student verification submitted&quot;,&quot;data&quot;:{&quot;isVerified&quot;:true}}</td></tr>
+    <tr><th>Notes</th><td>No format validation on verification</td></tr>
+    <tr><th>Techniques</th><td>Security testing, Security, Validation, Authorization testing</td></tr>
+    <tr><th>Impact</th><td>Serious functional/security defect harming users, privacy, or business data.</td></tr>
+  </table>
+  <div class='ev'>Evidence: API response JSON captured in test script.</div>
+</div><div class="card sev-high">
+  <div class="card-top"><span class="badge sev-high">High</span><span class="cid">API-084</span><span class="prio">P2 - Current release</span></div>
+  <div class="ctitle">F-15: Double-cancel booking inflates seats</div>
+  <table class="kv">
+    <tr><th>Category</th><td>Business logic</td></tr>
+    <tr><th>Module</th><td>CampusPool - https://carpool.33.jugaar.ai</td></tr>
+    <tr><th>Steps</th><td><code>https://carpool.33.jugaar.ai/api</code> → <code>POST /bookings/a2240e2e-83fa-4cdc-948f-ff7163176e92/cancel again</code></td></tr>
+    <tr><th>Expected (Oracle)</th><td class="ok">Seat count after 2nd cancel = 6 (was 4)</td></tr>
+    <tr><th>Actual</th><td class="bad">after=4 after2=6; second cancel must be rejected/no-op</td></tr>
+    <tr><th>Notes</th><td>Inventory corruption from double-cancel</td></tr>
+    <tr><th>Techniques</th><td>State transition testing, Business logic, Business logic testing</td></tr>
+    <tr><th>Impact</th><td>Serious functional/security defect harming users, privacy, or business data.</td></tr>
+  </table>
+  <div class='ev'>Evidence: API response JSON captured in test script.</div>
+</div><div class="card sev-high">
+  <div class="card-top"><span class="badge sev-high">High</span><span class="cid">API-085</span><span class="prio">P2 - Current release</span></div>
+  <div class="ctitle">F-16: Passenger self-confirms own booking</div>
+  <table class="kv">
+    <tr><th>Category</th><td>Business logic</td></tr>
+    <tr><th>Module</th><td>CampusPool - https://carpool.33.jugaar.ai</td></tr>
+    <tr><th>Steps</th><td><code>https://carpool.33.jugaar.ai/api</code> → <code>PUT /bookings/9a9e8419-4f11-42cf-bff5-a406f01f2fb6/status confirmed (passenger)</code></td></tr>
+    <tr><th>Expected (Oracle)</th><td class="ok">Only driver should confirm bookings</td></tr>
+    <tr><th>Actual</th><td class="bad">{&quot;success&quot;: true, &quot;message&quot;: &quot;Booking updated successfully&quot;, &quot;data&quot;: {&quot;booking&quot;: {&quot;id&quot;: &quot;9a9e8419-4f11-42cf-bff5-a406f01f2fb6&quot;, &quot;rideId&quot;: &quot;c6b6ff08-6fad-4b27-8183-3fb2e8e80f6b&quot;, &quot;passengerId&quot;: &quot;d8424298-1bb3-490b-84f8-bfb5d878da33&quot;, &quot;seatsBooked&quot;: 1, &quot;pickupPoint&quot;: &quot;C&quot;, &quot;status&quot;: &quot;confirmed&quot;, &quot;paymentStatus&quot;: &quot;pending&quot;, &quot;amountPaid&quot;: 130, &quot;createdAt&quot;: &quot;2026-</td></tr>
+    <tr><th>Notes</th><td>If passenger can self-confirm, approval workflow is broken</td></tr>
+    <tr><th>Techniques</th><td>State transition testing, Business logic, Business logic testing</td></tr>
+    <tr><th>Impact</th><td>Serious functional/security defect harming users, privacy, or business data.</td></tr>
+  </table>
+  <div class='ev'>Evidence: API response JSON captured in test script.</div>
+</div><div class="card sev-high">
+  <div class="card-top"><span class="badge sev-high">High</span><span class="cid">API-091</span><span class="prio">P2 - Current release</span></div>
+  <div class="ctitle">F-17: Review rating bounds unvalidated (latent) - rating=99 rejected only by workflow gate</div>
+  <table class="kv">
+    <tr><th>Category</th><td>Security</td></tr>
+    <tr><th>Module</th><td>CampusPool - https://carpool.33.jugaar.ai</td></tr>
+    <tr><th>Steps</th><td><code>https://carpool.33.jugaar.ai/api</code> → <code>POST /reviews comment=&lt;img onerror&gt;</code></td></tr>
+    <tr><th>Expected (Oracle)</th><td class="ok">Comment must be safely stored/encoded</td></tr>
+    <tr><th>Actual</th><td class="bad">{&quot;success&quot;: false, &quot;message&quot;: &quot;Can only review completed rides&quot;}</td></tr>
+    
+    <tr><th>Techniques</th><td>Security testing (XSS), Security, Security testing, Authorization testing</td></tr>
+    <tr><th>Impact</th><td>Serious functional/security defect harming users, privacy, or business data.</td></tr>
+  </table>
+  <div class='ev'>Evidence: API response JSON captured in test script.</div>
+</div><div class="card sev-high">
+  <div class="card-top"><span class="badge sev-high">High</span><span class="cid">API-095</span><span class="prio">P2 - Current release</span></div>
+  <div class="ctitle">F-18: Payment gateway fully simulated — no real JazzCash/EasyPaisa/bank</div>
+  <table class="kv">
+    <tr><th>Category</th><td>Functional / Payment</td></tr>
+    <tr><th>Module</th><td>CampusPool - https://carpool.33.jugaar.ai</td></tr>
+    <tr><th>Steps</th><td><code>https://carpool.33.jugaar.ai/api</code> → <code>paymentController.createPayment always creates completed payment with generated TXN</code></td></tr>
+    <tr><th>Expected (Oracle)</th><td class="ok">API returns &#x27;Payment successful&#x27; with fake TXN_ id — users believe money moved</td></tr>
+    <tr><th>Actual</th><td class="bad">Real payment provider integration or clearly marked sandbox</td></tr>
+    <tr><th>Notes</th><td>False payment confirmation is a critical business defect</td></tr>
+    <tr><th>Techniques</th><td>Functional testing, code review, Functional, Payment, State transition testing, Business logic testing</td></tr>
+    <tr><th>Impact</th><td>Serious functional/security defect harming users, privacy, or business data.</td></tr>
+  </table>
+  <div class='ev'>Evidence: API response JSON captured in test script.</div>
+</div><div class="card sev-high">
+  <div class="card-top"><span class="badge sev-high">High</span><span class="cid">CR-01</span><span class="prio">P2 - Current release</span></div>
+  <div class="ctitle">F-19: Hardcoded JWT secrets committed to repository</div>
+  <table class="kv">
+    <tr><th>Category</th><td>Security</td></tr>
+    <tr><th>Module</th><td>CampusPool - https://carpool.33.jugaar.ai</td></tr>
+    <tr><th>Steps</th><td>Inspect source <code>/root/campuspool</code> — ecosystem.config.js, backend/.env, .env - JWT_SECRET hardcoded in repo</td></tr>
+    <tr><th>Expected (Oracle)</th><td class="ok">Secrets must live in env vars / secret manager, never in git</td></tr>
+    <tr><th>Actual</th><td class="bad">Secrets present in source control and deploy configs</td></tr>
+    <tr><th>Notes</th><td>Anyone with repo access can forge valid JWTs for any user id.</td></tr>
+    <tr><th>Techniques</th><td>Static analysis, code review, Security, Security testing, Authorization testing</td></tr>
+    <tr><th>Impact</th><td>Serious functional/security defect harming users, privacy, or business data.</td></tr>
+  </table>
+  <div class='ev'>Evidence: API response JSON captured in test script.</div>
+</div><div class="card sev-high">
+  <div class="card-top"><span class="badge sev-high">High</span><span class="cid">CR-09</span><span class="prio">P2 - Current release</span></div>
+  <div class="ctitle">F-20: Sanitize middleware stores HTML-encoded data (double-encoding)</div>
+  <table class="kv">
+    <tr><th>Category</th><td>Security</td></tr>
+    <tr><th>Module</th><td>CampusPool - https://carpool.33.jugaar.ai</td></tr>
+    <tr><th>Steps</th><td>Inspect source <code>/root/campuspool</code> — POST /auth/register fullName=&lt;script&gt;alert(&#x27;xss&#x27;)&lt;/script&gt;</td></tr>
+    <tr><th>Expected (Oracle)</th><td class="ok">Output encoding belongs at render time; storing encoded data corrupts content</td></tr>
+    <tr><th>Actual</th><td class="bad">sanitize middleware HTML-encodes and stores encoded entities in DB</td></tr>
+    <tr><th>Notes</th><td>Users see literal &amp;lt;script&amp;gt; in profiles/messages; double-encoding bug class.</td></tr>
+    <tr><th>Techniques</th><td>Security testing, input validation, Security, Authorization testing</td></tr>
+    <tr><th>Impact</th><td>Serious functional/security defect harming users, privacy, or business data.</td></tr>
+  </table>
+  <div class='ev'>Evidence: API response JSON captured in test script.</div>
+</div><div class="card sev-high">
+  <div class="card-top"><span class="badge sev-high">High</span><span class="cid">CR-12</span><span class="prio">P2 - Current release</span></div>
+  <div class="ctitle">F-21: JWT in localStorage with no server-side revocation</div>
+  <table class="kv">
+    <tr><th>Category</th><td>Security</td></tr>
+    <tr><th>Module</th><td>CampusPool - https://carpool.33.jugaar.ai</td></tr>
+    <tr><th>Steps</th><td>Inspect source <code>/root/campuspool</code> — frontend AuthContext stores JWT in localStorage; logout only clears client</td></tr>
+    <tr><th>Expected (Oracle)</th><td class="ok">Logout should invalidate session server-side</td></tr>
+    <tr><th>Actual</th><td class="bad">No server-side token blacklist/revoke; 7-day expiry</td></tr>
+    <tr><th>Notes</th><td>Stolen token remains valid up to 7 days after logout.</td></tr>
+    <tr><th>Techniques</th><td>Code review, session management, Security, Security testing, Authorization testing</td></tr>
+    <tr><th>Impact</th><td>Serious functional/security defect harming users, privacy, or business data.</td></tr>
+  </table>
+  <div class='ev'>Evidence: API response JSON captured in test script.</div>
+</div><div class="card sev-high">
+  <div class="card-top"><span class="badge sev-high">High</span><span class="cid">UI-006</span><span class="prio">P2 - Current release</span></div>
+  <div class="ctitle">F-22: Search free-text filter ignored — unrelated rides returned</div>
+  <table class="kv">
+    <tr><th>Category</th><td>Functional</td></tr>
+    <tr><th>Module</th><td>CampusPool - https://carpool.33.jugaar.ai</td></tr>
+    <tr><th>Steps</th><td>Open <code>https://carpool.33.jugaar.ai</code> · Search From=Lahore To=Islamabad · compare with expected.</td></tr>
+    <tr><th>Expected (Oracle)</th><td class="ok">Users trust filter; wrong results cause incorrect bookings</td></tr>
+    <tr><th>Actual</th><td class="bad">Karachi rides still displayed; API ignores free-text</td></tr>
+    
+    <tr><th>Techniques</th><td>Functional, search testing, Functional testing</td></tr>
+    <tr><th>Impact</th><td>Serious functional/security defect harming users, privacy, or business data.</td></tr>
+  </table>
+  <div class='ev'>Evidence: API response JSON captured in test script.</div>
+</div><div class="card sev-high">
+  <div class="card-top"><span class="badge sev-high">High</span><span class="cid">UI-007</span><span class="prio">P2 - Current release</span></div>
+  <div class="ctitle">F-23: Ride details exposes driver phone publicly</div>
+  <table class="kv">
+    <tr><th>Category</th><td>Security / Privacy</td></tr>
+    <tr><th>Module</th><td>CampusPool - https://carpool.33.jugaar.ai</td></tr>
+    <tr><th>Steps</th><td>Open <code>https://carpool.33.jugaar.ai</code> · Open ride details unauthenticated · compare with expected.</td></tr>
+    <tr><th>Expected (Oracle)</th><td class="ok">Public pages must not expose personal contact details</td></tr>
+    <tr><th>Actual</th><td class="bad">Phone visible in UI and API</td></tr>
+    
+    <tr><th>Techniques</th><td>Privacy testing, Security, Privacy, Security testing, Authorization testing</td></tr>
+    <tr><th>Impact</th><td>Serious functional/security defect harming users, privacy, or business data.</td></tr>
+  </table>
+  <div class='ev'>Evidence: API response JSON captured in test script.</div>
+</div><div class="card sev-high">
+  <div class="card-top"><span class="badge sev-high">High</span><span class="cid">UI-015</span><span class="prio">P2 - Current release</span></div>
+  <div class="ctitle">F-24: Student verification fake — hardcoded CNIC / no real check</div>
+  <table class="kv">
+    <tr><th>Category</th><td>Security / Functional</td></tr>
+    <tr><th>Module</th><td>CampusPool - https://carpool.33.jugaar.ai</td></tr>
+    <tr><th>Steps</th><td>Open <code>https://carpool.33.jugaar.ai</code> · Open profile as demo user, inspect Verify control · compare with expected.</td></tr>
+    <tr><th>Expected (Oracle)</th><td class="ok">Anyone can self-declare verified student status — platform trust undermined</td></tr>
+    <tr><th>Actual</th><td class="bad">hardcoded CNIC in DOM=False; verify button=False; backend /auth/verify sets isVerified=true with no checks</td></tr>
+    
+    <tr><th>Techniques</th><td>Functional, security testing, Security, Authorization testing</td></tr>
+    <tr><th>Impact</th><td>Serious functional/security defect harming users, privacy, or business data.</td></tr>
+  </table>
+  <div class='ev'>Evidence: API response JSON captured in test script.</div>
+</div><div class="card sev-high">
+  <div class="card-top"><span class="badge sev-high">High</span><span class="cid">UI-027</span><span class="prio">P2 - Current release</span></div>
+  <div class="ctitle">F-25: Create Ride past date + 0 seats submit</div>
+  <table class="kv">
+    <tr><th>Category</th><td>UI / Validation</td></tr>
+    <tr><th>Module</th><td>CampusPool - https://carpool.33.jugaar.ai</td></tr>
+    <tr><th>Steps</th><td>Open <code>https://carpool.33.jugaar.ai</code> · Set past date, seats=0, submit · compare with expected.</td></tr>
+    <tr><th>Expected (Oracle)</th><td class="ok">Past departures and 0 seats must be rejected in UI</td></tr>
+    <tr><th>Actual</th><td class="bad">url=https://carpool.33.jugaar.ai/create-ride text=CampusPool
+Find Rides
+Offer Ride
+Driver Hub
+Safety
+Impact
+Premium
+Achievements
+Earnings
+Marketplace
+3
+A
+Offer a Ride
+
+Share your journey and split fuel costs
+
+Pickup Location
+Select pickup
+North Nazimabad
+Gulshan-e-Iqbal
+Federal B Area
+Malir
+Korangi
+</td></tr>
+    
+    <tr><th>Techniques</th><td>Boundary value analysis, UI, Validation, Equivalence partitioning</td></tr>
+    <tr><th>Impact</th><td>Serious functional/security defect harming users, privacy, or business data.</td></tr>
+  </table>
+  <div class='ev'>Evidence: API response JSON captured in test script.</div>
+</div>
+<div class="pagebreak" id="s5"></div>
+<h2 class="sec">5. Additional Findings — Medium &amp; Low (59)</h2>
+<p class="small">Compact register of remaining findings with oracle, actual result and techniques.</p>
+<table class="data">
+  <tr><th style="width:7%">ID</th><th style="width:7%">Sev</th><th style="width:30%">Finding</th><th style="width:28%">Expected (Oracle)</th><th style="width:28%">Actual / Evidence</th></tr>
+<tr><td>API-016<br/><span class='small'>F-26</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Create ride 0 seats - generic error message (validation hidden)</strong><br/><span class='small'>Validation · Boundary value analysis, Validation, Equivalence partitioning</span></td><td class='ok'>Model validate min:1 — API must reject 0 seats</td><td class='bad'>{&quot;success&quot;: false, &quot;message&quot;: &quot;Failed to create ride&quot;}</td></tr><tr><td>API-017<br/><span class='small'>F-27</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Create ride negative seats - generic error message</strong><br/><span class='small'>Validation · Boundary value analysis, Validation, Equivalence partitioning</span></td><td class='ok'>Negative seat count must be rejected</td><td class='bad'>{&quot;success&quot;: false, &quot;message&quot;: &quot;Failed to create ride&quot;}</td></tr><tr><td>API-018<br/><span class='small'>F-28</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Create ride negative price - generic error message</strong><br/><span class='small'>Validation · Boundary value analysis, Validation, Equivalence partitioning</span></td><td class='ok'>Negative fare must be rejected; amountPaid would go negative</td><td class='bad'>{&quot;success&quot;: false, &quot;message&quot;: &quot;Failed to create ride&quot;}</td></tr><tr><td>API-019<br/><span class='small'>F-29</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Create ride with 0 price</strong><br/><span class='small'>Validation · Boundary value analysis, Validation, Equivalence partitioning</span></td><td class='ok'>0 fare should be intentional/validated</td><td class='bad'>{&quot;success&quot;: true, &quot;message&quot;: &quot;Ride created successfully&quot;, &quot;data&quot;: {&quot;ride&quot;: {&quot;id&quot;: &quot;158193df-7c59-4663-9626-6e40098bedb7&quot;, &quot;status&quot;: &quot;active&quot;, &quot;driverI</td></tr><tr><td>API-021<br/><span class='small'>F-30</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Create ride seats&gt;7 - generic error message</strong><br/><span class='small'>Validation · Boundary value analysis, Validation, Equivalence partitioning</span></td><td class='ok'>Model max is 7; exceeding max should be rejected</td><td class='bad'>{&quot;success&quot;: false, &quot;message&quot;: &quot;Failed to create ride&quot;}</td></tr><tr><td>API-024<br/><span class='small'>F-31</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Search by free-text origin/destination ignored — returns unrelated rides</strong><br/><span class='small'>Functional · Functional, search testing, Functional testing</span></td><td class='ok'>UI implies text search; API only supports lat/lng — silent wrong results confuse users</td><td class='bad'>{&quot;success&quot;: true, &quot;data&quot;: {&quot;rides&quot;: [{&quot;id&quot;: &quot;8a788b84-2cb5-4bd4-8b8d-9c39577d1e83&quot;, &quot;driverId&quot;: &quot;19b3d7ed-bc44-4ab4-93c9-412650d73a3d&quot;, &quot;originLat&quot;: 2</td></tr><tr><td>API-026<br/><span class='small'>F-32</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Search limit=999999 resource abuse</strong><br/><span class='small'>Performance / API · Performance, API testing, API</span></td><td class='ok'>Limit must be clamped to a sane max to prevent DoS</td><td class='bad'>{&quot;success&quot;: true, &quot;data&quot;: {&quot;rides&quot;: [{&quot;id&quot;: &quot;8a788b84-2cb5-4bd4-8b8d-9c39577d1e83&quot;, &quot;driverId&quot;: &quot;19b3d7ed-bc44-4ab4-93c9-412650d73a3d&quot;, &quot;originLat&quot;: 2</td></tr><tr><td>API-029<br/><span class='small'>F-33</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Book ride 0 seats - generic Failed to create booking message</strong><br/><span class='small'>Business logic · Boundary value analysis, business rules, Business logic</span></td><td class='ok'>0 seats must be rejected; creates bogus zero-amount booking</td><td class='bad'>{&quot;success&quot;: false, &quot;message&quot;: &quot;Failed to create booking&quot;}</td></tr><tr><td>API-031<br/><span class='small'>F-34</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Book ride negative seats - generic error message (validation hidden)</strong><br/><span class='small'>Business logic · Boundary value analysis, business rules, Business logic</span></td><td class='ok'>Negative seats must be rejected; availableSeats - (-2) INCREASES seats</td><td class='bad'>{&quot;success&quot;: false, &quot;message&quot;: &quot;Failed to create booking&quot;}</td></tr><tr><td>API-038<br/><span class='small'>F-35</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Booking creation fails with opaque generic errors</strong><br/><span class='small'>Business logic · State transition testing, Business logic, Business logic testing</span></td><td class='ok'>Second booking must be rejected if already booked</td><td class='bad'>first={&#x27;success&#x27;: False, &#x27;message&#x27;: &#x27;Failed to create booking&#x27;} | second={&#x27;success&#x27;: False, &#x27;message&#x27;: &#x27;Failed to create booking&#x27;}</td></tr><tr><td>API-050<br/><span class='small'>F-36</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Payment with unlisted method accepted</strong><br/><span class='small'>Validation · Equivalence partitioning, Validation, Boundary value analysis</span></td><td class='ok'>Method must be constrained to JazzCash/EasyPaisa/Bank/Cash</td><td class='bad'>{&quot;success&quot;: true, &quot;message&quot;: &quot;Payment successful&quot;, &quot;data&quot;: {&quot;payment&quot;: {&quot;id&quot;: &quot;6fda7581-4e6a-4f6f-8c3b-c32a4f02572b&quot;, &quot;bookingId&quot;: &quot;e06ca810-f61f-44f7</td></tr><tr><td>API-060<br/><span class='small'>F-37</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Send empty message content</strong><br/><span class='small'>Validation · Equivalence partitioning, Validation, Boundary value analysis</span></td><td class='ok'>Empty messages must be rejected</td><td class='bad'>{&quot;success&quot;: true, &quot;message&quot;: &quot;Message sent successfully&quot;, &quot;data&quot;: {&quot;message&quot;: {&quot;id&quot;: &quot;85554878-fa7e-447a-90f9-1b191cb477ab&quot;, &quot;isRead&quot;: false, &quot;senderI</td></tr><tr><td>API-065<br/><span class='small'>F-38</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Fetch other user&#x27;s profile by ID (PII exposure)</strong><br/><span class='small'>Security · Privacy, IDOR testing, Security</span></td><td class='ok'>Public profiles must not expose phone/email without consent rules</td><td class='bad'>{&quot;success&quot;: true, &quot;data&quot;: {&quot;id&quot;: &quot;19b3d7ed-bc44-4ab4-93c9-412650d73a3d&quot;, &quot;email&quot;: &quot;ahmed@nu.edu.pk&quot;, &quot;fullName&quot;: &quot;Ahmed Khan&quot;, &quot;phone&quot;: &quot;+923001234567</td></tr><tr><td>API-076<br/><span class='small'>F-39</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Profile update attempts email change (ignored silently)</strong><br/><span class='small'>Functional · Functional testing, Functional</span></td><td class='ok'>If email not updatable, API should say so; silent ignore misleads</td><td class='bad'>Success but email unchanged</td></tr><tr><td>API-077<br/><span class='small'>F-40</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Profile update attempts password change via profile (ignored)</strong><br/><span class='small'>Functional · Functional testing, Functional</span></td><td class='ok'>Password change must use dedicated endpoint or be rejected clearly</td><td class='bad'>Success but password unchanged</td></tr><tr><td>API-079<br/><span class='small'>F-41</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Profile update invalid phone</strong><br/><span class='small'>Validation · Boundary value analysis, Validation, Equivalence partitioning</span></td><td class='ok'>Invalid phone must be rejected with clear message</td><td class='bad'>Failed to update profile</td></tr><tr><td>API-087<br/><span class='small'>F-42</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Driver marks booking completed while ride still active</strong><br/><span class='small'>Business logic · State transition testing, Business logic, Business logic testing</span></td><td class='ok'>Completed status should require ride completion workflow</td><td class='bad'>{&quot;success&quot;: true, &quot;message&quot;: &quot;Booking updated successfully&quot;, &quot;data&quot;: {&quot;booking&quot;: {&quot;id&quot;: &quot;9a9e8419-4f11-42cf-bff5-a406f01f2fb6&quot;, &quot;rideId&quot;: &quot;c6b6ff08-6f</td></tr><tr><td>API-089<br/><span class='small'>F-43</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Duplicate review prevention not reachable/unverified</strong><br/><span class='small'>Business logic · State transition testing, Business logic, Business logic testing</span></td><td class='ok'>Only one review per passenger per ride allowed</td><td class='bad'>{&quot;success&quot;: false, &quot;message&quot;: &quot;Can only review completed rides&quot;}</td></tr><tr><td>API-090<br/><span class='small'>F-44</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Review rating bounds unvalidated when review path opens</strong><br/><span class='small'>Validation · Boundary value analysis, Validation, Equivalence partitioning</span></td><td class='ok'>Rating must be constrained 1-5 even after booking check passes</td><td class='bad'>{&quot;success&quot;: false, &quot;message&quot;: &quot;Can only review completed rides&quot;}</td></tr><tr><td>API-093<br/><span class='small'>F-45</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>User search endpoint broken</strong><br/><span class='small'>API / Functional · API testing, API, Functional</span></td><td class='ok'>Search must return results or clear empty state</td><td class='bad'>{&quot;success&quot;: false, &quot;message&quot;: &quot;Failed to search users&quot;}</td></tr><tr><td>API-097<br/><span class='small'>F-46</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>CORS allowlist includes raw IP origins (67.215.237.229)</strong><br/><span class='small'>Security · CORS testing, code review, Security</span></td><td class='ok'>IP-based origins in allowlist weaken origin isolation</td><td class='bad'>Only production HTTPS domain + explicit localhost dev origins</td></tr><tr><td>API-098<br/><span class='small'>F-47</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>JWT expiry 7 days + localStorage + no server revoke</strong><br/><span class='small'>Security · Session management, code review, Security</span></td><td class='ok'>7-day bearer token stored in localStorage; logout does not revoke server-side</td><td class='bad'>Shorter expiry, refresh tokens, server-side revoke on logout</td></tr><tr><td>API-099<br/><span class='small'>F-48</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Forgot password feature completely missing (UI link dead + no API)</strong><br/><span class='small'>Functional · Functional, navigation testing, Functional testing</span></td><td class='ok'>No backend endpoint exists; UI link does nothing useful</td><td class='bad'>Full password reset flow (email token or OTP)</td></tr><tr><td>CR-02<br/><span class='small'>F-49</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>No admin/moderation pages despite feature claims</strong><br/><span class='small'>Functional · Exploratory, feature completeness, Functional</span></td><td class='ok'>README/UI claims moderation; empty folder = unimplemented feature</td><td class='bad'>No admin UI routes or components exist</td></tr><tr><td>CR-03<br/><span class='small'>F-50</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Recurring rides stored but never expanded into actual rides</strong><br/><span class='small'>Functional · Business rules, code review, Functional</span></td><td class='ok'>Recurring option must generate concrete future rides or be removed from UI</td><td class='bad'>recurringDays saved on ride; no scheduler creates future instances</td></tr><tr><td>CR-04<br/><span class='small'>F-51</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>No automated test suite in repository</strong><br/><span class='small'>QA Process · Static analysis, process review, QA Process</span></td><td class='ok'>Production apps need regression tests for booking/auth/payment flows</td><td class='bad'>No test files or test runner config outside node_modules</td></tr><tr><td>CR-05<br/><span class='small'>F-52</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Broken deploy configs (Procfile / render.yaml)</strong><br/><span class='small'>Reliability · Static analysis, deployment review, Reliability</span></td><td class='ok'>Deploy manifests must match project layout</td><td class='bad'>Root has no package.json - deploy commands cannot work as written</td></tr><tr><td>CR-07<br/><span class='small'>F-53</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Demo credentials printed by start.sh in cleartext</strong><br/><span class='small'>Security · Security review, information disclosure, Security</span></td><td class='ok'>Demo creds must not be advertised on production hosts</td><td class='bad'>ahmed@nu.edu.pk / test123 etc. displayed on server start logs</td></tr><tr><td>CR-08<br/><span class='small'>F-54</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>No email verification / SMTP integration</strong><br/><span class='small'>Functional · Feature completeness, code review, Functional</span></td><td class='ok'>Registration trust requires real email verification</td><td class='bad'>No mailer code; README claims email verification</td></tr><tr><td>CR-10<br/><span class='small'>F-55</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Generic error messages hide field-level validation failures</strong><br/><span class='small'>Reliability · Code review, error handling, Reliability</span></td><td class='ok'>API should return 400 with field-level validation errors</td><td class='bad'>Controller catch blocks swallow Sequelize validation messages</td></tr><tr><td>CR-11<br/><span class='small'>F-56</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>User search API endpoint broken</strong><br/><span class='small'>Functional · Code review, data model, Functional</span></td><td class='ok'>Search must return results or explicit empty state</td><td class='bad'>Endpoint returns Failed to search users</td></tr><tr><td>CR-13<br/><span class='small'>F-57</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>DataTypes.ARRAY may break on SQLite dialect</strong><br/><span class='small'>Compatibility · Code review, data model, Compatibility</span></td><td class='ok'>DB portability must be tested for chosen ORM types</td><td class='bad'>SQLite does not support ARRAY type the same way as Postgres</td></tr><tr><td>CR-14<br/><span class='small'>F-58</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Seat booking race condition (no transaction/atomic decrement)</strong><br/><span class='small'>Performance · Code review, concurrency, Performance</span></td><td class='ok'>Seat decrement must use atomic UPDATE ... WHERE availableSeats &gt;= n</td><td class='bad'>Concurrent bookings can oversell seats (race condition)</td></tr><tr><td>CR-16<br/><span class='small'>F-59</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Public ride detail exposes driver phone</strong><br/><span class='small'>Security · Code review, authz, Security</span></td><td class='ok'>PII should be hidden until mutual booking</td><td class='bad'>Public ride detail returns phone in driver object</td></tr><tr><td>CR-17<br/><span class='small'>F-60</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Profile update silently ignores empty/fullName edge cases</strong><br/><span class='small'>Functional · Code review, UX, Functional</span></td><td class='ok'>Update API should validate and apply explicit field updates</td><td class='bad'>Cannot clear optional fields; empty string silently ignored</td></tr><tr><td>CR-19<br/><span class='small'>F-61</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Rate limiting missing on reviews/messages/safety/impact/users</strong><br/><span class='small'>Security · Security review, rate limiting, Security</span></td><td class='ok'>All public API routes should be rate limited</td><td class='bad'>reviews/messages/safety/impact/users routes unthrottled</td></tr><tr><td>CR-20<br/><span class='small'>F-62</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Impact/Emergency/PublicProfile pages use mock data only</strong><br/><span class='small'>Functional · Code review, UI, Functional</span></td><td class='ok'>UI features must wire to backend APIs</td><td class='bad'>Pages use local mock state; do not call /api/impact or /api/safety</td></tr><tr><td>UI-001<br/><span class='small'>F-63</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>&#x27;Forgot password&#x27; dead link</strong><br/><span class='small'>Usability · Navigation, dead-link testing, Usability</span></td><td class='ok'>Password recovery is mandatory; dead link blocks account recovery</td><td class='bad'>href=no-href or no route<br/><em>Shot: 07_forgot_password.png</em></td></tr><tr><td>UI-008<br/><span class='small'>F-64</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Premium page — mock/hardcoded data (no real API)</strong><br/><span class='small'>Functional · Exploratory, functional testing, Functional</span></td><td class='ok'>Feature presented but not backed by working backend</td><td class='bad'>Hardcoded plans/pricing<br/><em>Shot: mock_premium.png</em></td></tr><tr><td>UI-009<br/><span class='small'>F-65</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Earnings page — mock/hardcoded data (no real API)</strong><br/><span class='small'>Functional · Exploratory, functional testing, Functional</span></td><td class='ok'>Fake feature</td><td class='bad'>Hardcoded earnings totals<br/><em>Shot: mock_earnings.png</em></td></tr><tr><td>UI-010<br/><span class='small'>F-66</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Achievements page — mock/hardcoded data (no real API)</strong><br/><span class='small'>Functional · Exploratory, functional testing, Functional</span></td><td class='ok'>Fake feature</td><td class='bad'>Hardcoded badges/leaderboards<br/><em>Shot: mock_achievements.png</em></td></tr><tr><td>UI-011<br/><span class='small'>F-67</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Smart Match page — mock/hardcoded data (no real API)</strong><br/><span class='small'>Functional · Exploratory, functional testing, Functional</span></td><td class='ok'>Fake feature</td><td class='bad'>Fake AI matches<br/><em>Shot: mock_smart_match.png</em></td></tr><tr><td>UI-012<br/><span class='small'>F-68</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Marketplace page — mock/hardcoded data (no real API)</strong><br/><span class='small'>Functional · Exploratory, functional testing, Functional</span></td><td class='ok'>Fake feature</td><td class='bad'>Hardcoded deals<br/><em>Shot: mock_marketplace.png</em></td></tr><tr><td>UI-013<br/><span class='small'>F-69</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Sponsored page — mock/hardcoded data (no real API)</strong><br/><span class='small'>Functional · Exploratory, functional testing, Functional</span></td><td class='ok'>Fake feature</td><td class='bad'>Hardcoded sponsorships<br/><em>Shot: mock_sponsored.png</em></td></tr><tr><td>UI-014<br/><span class='small'>F-70</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Cities page — mock/hardcoded data (no real API)</strong><br/><span class='small'>Functional · Exploratory, functional testing, Functional</span></td><td class='ok'>Fake feature</td><td class='bad'>Hardcoded city stats<br/><em>Shot: mock_cities.png</em></td></tr><tr><td>UI-026<br/><span class='small'>F-71</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Create Ride empty submit validation</strong><br/><span class='small'>UI / Validation · Form validation testing, UI, Validation</span></td><td class='ok'>Form validation UX</td><td class='bad'>text=CampusPool
+Find Rides
+Offer Ride
+Driver Hub
+Safety
+Impact
+Premium
+Achievements
+Earnings
+Marketplace
+3
+A
+Offer a Ride
+
+Share your journey and spli<br/><em>Shot: 14c3_create_ride_empty_submit.png</em></td></tr><tr><td>UI-028<br/><span class='small'>F-72</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Responsive iphone_se 375x667 horizontal overflow</strong><br/><span class='small'>Responsiveness / Compatibility · Responsive design testing, Responsiveness, Compatibility</span></td><td class='ok'>Mobile users must not see cut-off content</td><td class='bad'>scrollW=401 clientW=375 overflow=True<br/><em>Shot: resp_iphone_se_home.png</em></td></tr><tr><td>UI-029<br/><span class='small'>F-73</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Responsive iphone_14 390x844 horizontal overflow</strong><br/><span class='small'>Responsiveness / Compatibility · Responsive design testing, Responsiveness, Compatibility</span></td><td class='ok'>Mobile users must not see cut-off content</td><td class='bad'>scrollW=401 clientW=390 overflow=True<br/><em>Shot: resp_iphone_14_home.png</em></td></tr><tr><td>UI-030<br/><span class='small'>F-74</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Responsive galaxy_s 360x740 horizontal overflow</strong><br/><span class='small'>Responsiveness / Compatibility · Responsive design testing, Responsiveness, Compatibility</span></td><td class='ok'>Mobile users must not see cut-off content</td><td class='bad'>scrollW=401 clientW=360 overflow=True<br/><em>Shot: resp_galaxy_s_home.png</em></td></tr><tr><td>UI-032<br/><span class='small'>F-75</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Responsive desktop_small 1024x768 horizontal overflow</strong><br/><span class='small'>Responsiveness / Compatibility · Responsive design testing, Responsiveness, Compatibility</span></td><td class='ok'>Mobile users must not see cut-off content</td><td class='bad'>scrollW=1381 clientW=1024 overflow=True<br/><em>Shot: resp_desktop_small_home.png</em></td></tr><tr><td>UI-036<br/><span class='small'>F-76</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Accessibility spot-check home</strong><br/><span class='small'>Accessibility · Accessibility testing (WCAG), Accessibility</span></td><td class='ok'>WCAG 2.1 AA requires text alternatives and labels</td><td class='bad'>{&#x27;imgs&#x27;: 0, &#x27;missingAlt&#x27;: 0, &#x27;inputs&#x27;: 0, &#x27;unlabeled&#x27;: 0, &#x27;buttons&#x27;: 3, &#x27;emptyBtns&#x27;: 2}<br/><em>Shot: 17_a11y_home.png</em></td></tr><tr><td>UI-037<br/><span class='small'>F-77</span></td><td><span class='badge sev-medium'>Medium</span></td><td><strong>Accessibility spot-check search</strong><br/><span class='small'>Accessibility · Accessibility testing (WCAG), Accessibility</span></td><td class='ok'>Labels required for assistive technology</td><td class='bad'>{&#x27;inputs&#x27;: 5, &#x27;unlabeled&#x27;: 2}<br/><em>Shot: 17b_a11y_search.png</em></td></tr><tr><td>API-025<br/><span class='small'>F-78</span></td><td><span class='badge sev-low'>Low</span></td><td><strong>Search minSeats=-10 unvalidated</strong><br/><span class='small'>Validation · Boundary value analysis, Validation, Equivalence partitioning</span></td><td class='ok'>Negative minSeats should be rejected or ignored explicitly</td><td class='bad'>{&quot;success&quot;: true, &quot;data&quot;: {&quot;rides&quot;: [{&quot;id&quot;: &quot;8a788b84-2cb5-4bd4-8b8d-9c39577d1e83&quot;, &quot;driverId&quot;: &quot;19b3d7ed-bc44-4ab4-93c9-412650d73a3d&quot;, &quot;originLat&quot;: 2</td></tr><tr><td>API-027<br/><span class='small'>F-79</span></td><td><span class='badge sev-low'>Low</span></td><td><strong>Search with invalid departureDate</strong><br/><span class='small'>Validation · Equivalence partitioning, Validation, Boundary value analysis</span></td><td class='ok'>Invalid date should return 400, not silently ignore or 500</td><td class='bad'>{&quot;success&quot;: true, &quot;data&quot;: {&quot;rides&quot;: [], &quot;count&quot;: 0}}</td></tr><tr><td>CR-06<br/><span class='small'>F-80</span></td><td><span class='badge sev-low'>Low</span></td><td><strong>PORT inconsistency (5000 vs 5001 defaults)</strong><br/><span class='small'>Configuration · Configuration review, Configuration, Functional testing</span></td><td class='ok'>Single source of truth for ports prevents mis-routed traffic</td><td class='bad'>Multiple conflicting port defaults</td></tr><tr><td>CR-15<br/><span class='small'>F-81</span></td><td><span class='badge sev-low'>Low</span></td><td><strong>Real-time chat is polling only (30s interval)</strong><br/><span class='small'>Usability · Code review, UX, Usability</span></td><td class='ok'>Real-time chat should use push/websocket</td><td class='bad'>Messages appear up to 30s late; README claims real-time chat</td></tr><tr><td>CR-18<br/><span class='small'>F-82</span></td><td><span class='badge sev-low'>Low</span></td><td><strong>README claims unimplemented features (notifications, maps, admin)</strong><br/><span class='small'>Usability · Code review, documentation, Usability</span></td><td class='ok'>Documentation must match shipped functionality</td><td class='bad'>Multiple claimed features unimplemented</td></tr><tr><td>UI-002<br/><span class='small'>F-83</span></td><td><span class='badge sev-low'>Low</span></td><td><strong>&#x27;Remember me&#x27; checkbox cosmetic / non-functional</strong><br/><span class='small'>Usability · Usability testing, Usability, Navigation testing</span></td><td class='ok'>Misleading UI controls harm trust</td><td class='bad'>Present; AuthContext always stores token<br/><em>Shot: 06_login_page.png</em></td></tr><tr><td>UI-035<br/><span class='small'>F-84</span></td><td><span class='badge sev-low'>Low</span></td><td><strong>Unknown route handling (404)</strong><br/><span class='small'>Usability · Navigation, error handling, Usability</span></td><td class='ok'>SPA must handle unknown routes</td><td class='bad'>is404=False text=CampusPool
+Find Rides
+Offer Ride
+Driver Hub
+Safety
+Impact
+Premium
+Achievements
+Earnings
+Marketplace
+3
+A<br/><em>Shot: 16_custom_404.png</em></td></tr></table><div class="pagebreak" id="sA"></div><h2 class="sec">Appendix A — Feature List of the Application</h2><div class="feat"><h3>Authentication &amp; Accounts</h3><ul><li>Email/password registration (name, email, phone, university, department, year)</li><li>Login with JWT session token</li><li>Logout (client-side token clear)</li><li>Demo account quick-login cards on login page</li><li>Student verification self-service button (isVerified flag)</li><li>Profile view and edit (fullName, phone, university, department, year, photo)</li><li>Remember-me checkbox (UI only)</li><li>Forgot password link (UI only, non-functional)</li></ul><h3>Rides (Driver)</h3><ul><li>Create/offer a ride (Karachi location dropdowns, date/time, seats 1-6, price, vehicle type, AC, notes)</li><li>Recurring ride days (Mon-Fri) selection</li><li>My rides — upcoming/past tabs</li><li>Cancel own ride</li><li>Driver dashboard — confirm/reject pending bookings</li><li>Complete ride action (driver)</li><li>Ride search with filters (seats, max price, vehicle type, AC)</li><li>Ride detail page with driver card and reviews list</li></ul><h3>Bookings (Passenger)</h3><ul><li>Book ride with seats selector and price total</li><li>My bookings — upcoming/past, cancel booking</li><li>Pay Now flow for confirmed bookings</li><li>Rate ride (stars + comment) after completed rides</li><li>Unread message badge in navbar</li></ul><h3>Payments</h3><ul><li>Payment method selection: JazzCash, EasyPaisa, Bank, Cash</li><li>Mobile wallet phone number input</li><li>Bank transfer details display (HBL hardcoded)</li><li>Simulated payment success screen with transaction id</li><li>Refund request API (server-side)</li></ul><h3>Messaging</h3><ul><li>Conversation list</li><li>1:1 chat interface</li><li>Unread badge polling every 30 seconds</li><li>Message send/receive via REST API</li></ul><h3>Safety &amp; Impact</h3><ul><li>Emergency SOS UI (dials tel:15)</li><li>Police/Ambulance/Edhi contact numbers</li><li>Emergency contacts (local state only)</li><li>Mock live-location link</li><li>Impact dashboard UI (CO2/fuel savings, client-computed/mock)</li><li>Impact leaderboard API (public)</li><li>Safety SOS API endpoints (alerts + history)</li></ul><h3>Marketing / Mock Pages (not API-backed)</h3><ul><li>Premium plans page (Free/Pro/Elite pricing UI)</li><li>Earnings dashboard (hardcoded totals/charts)</li><li>Achievements / gamification badges and leaderboards</li><li>Smart Match (AI ride matching, mock)</li><li>Marketplace (deals, events, lost &amp; found, mock)</li><li>Sponsored rides (brand deals, mock)</li><li>City selector (5 Pakistani cities, mock stats)</li><li>Home landing marketing page (fabricated stats)</li><li>Public user profile page (mock/local)</li><li>Admin pages (empty directory, unimplemented)</li></ul><h3>Search &amp; Discovery</h3><ul><li>Ride search form (From/To/Date + filters)</li><li>Client-side sort/name filter on results</li><li>Hardcoded Karachi location coordinates</li></ul><h3>Non-functional features claimed or observed</h3><ul><li>HTTPS via Caddy reverse proxy with HSTS</li><li>Security headers partially set (HSTS, nosniff, Referrer-Policy)</li><li>Helmet middleware on API (CSP on API responses)</li><li>Rate limiting on auth/rides/bookings/payments</li><li>HTML-escape sanitize middleware on request bodies</li><li>JWT auth with bcrypt password hashing</li><li>Sequelize ORM with SQLite (dev) / PostgreSQL (prod intent)</li><li>PM2 process management for API</li><li>Responsive Tailwind CSS layout</li></ul></div>
+<div class="pagebreak" id="sB"></div>
+<h2 class="sec">Appendix B — Tools Used</h2>
+<table class="data">
+<tr><th>Tool</th><th>Purpose</th></tr>
+<tr><td>Google Chrome / Chromium + Playwright</td><td>Automated UI testing, screenshots, responsive matrix, console audit, cross-browser (Firefox/WebKit)</td></tr>
+<tr><td>Python 3.12 + requests</td><td>API/HTTP campaigns against https://carpool.33.jugaar.ai/api; evidence JSON capture</td></tr>
+<tr><td>Python test scripts</td><td>Scripted auth/ride/booking/payment/security suites under /root/qa-report/scripts</td></tr>
+<tr><td>Chromium headless print-to-PDF</td><td>A4 print-ready report generation</td></tr>
+<tr><td>Source code review</td><td>White-box analysis of /root/campuspool (controllers, models, middleware, deploy configs)</td></tr>
+<tr><td>Git / GitHub</td><td>Version control and publication of report package</td></tr>
+<tr><td>PM2 / Caddy</td><td>Live deployment topology (API :5001 behind reverse proxy)</td></tr>
+<tr><td>DOM audit via Playwright</td><td>Accessibility labels, overflow measurement, navigation timing</td></tr>
+</table>
+
+<div class="pagebreak" id="sC"></div>
+<h2 class="sec">Appendix C — Testing Techniques Applied (133)</h2>
+<p class="small">Brief requires 100+ techniques. Each was applied to at least one executed test case and cited on relevant findings.</p>
+<ol class="tech-list">
+<li><strong>Unit testing</strong> <span class='small'>(Level)</span> — Code-level verification via source review</li><li><strong>Integration testing</strong> <span class='small'>(Level)</span> — API endpoint + controller + model via HTTP</li><li><strong>System testing</strong> <span class='small'>(Level)</span> — End-to-end app behaviour on production URL</li><li><strong>Acceptance testing (UAT)</strong> <span class='small'>(Level)</span> — Journey checks against business rules</li><li><strong>End-to-end testing</strong> <span class='small'>(Level)</span> — Playwright browser journeys across pages</li><li><strong>Regression testing</strong> <span class='small'>(Level)</span> — Re-runs of critical paths after each phase</li><li><strong>Smoke testing</strong> <span class='small'>(Level)</span> — Health check + home/login/search baseline</li><li><strong>Sanity testing</strong> <span class='small'>(Level)</span> — Focused checks on booking and auth flows</li><li><strong>Black-box testing</strong> <span class='small'>(Approach)</span> — Behaviour driven by UI/API only</li><li><strong>White-box testing</strong> <span class='small'>(Approach)</span> — Source-informed tests (controllers, models)</li><li><strong>Grey-box testing</strong> <span class='small'>(Approach)</span> — Combined API knowledge + UI observation</li><li><strong>Static testing</strong> <span class='small'>(Approach)</span> — Code/config review without execution</li><li><strong>Dynamic testing</strong> <span class='small'>(Approach)</span> — Execution of app against live URL</li><li><strong>Exploratory testing</strong> <span class='small'>(Approach)</span> — Session-based unscripted exploration</li><li><strong>Ad-hoc testing</strong> <span class='small'>(Approach)</span> — Impromptu checks while navigating features</li><li><strong>Error guessing</strong> <span class='small'>(Approach)</span> — Intuition on seats, JWT, payments defect areas</li><li><strong>Script-based testing</strong> <span class='small'>(Approach)</span> — Python Playwright + requests evidence scripts</li><li><strong>Equivalence partitioning</strong> <span class='small'>(Method)</span> — Valid/invalid partitions for email, seats, price</li><li><strong>Boundary value analysis</strong> <span class='small'>(Method)</span> — 0/-1/1/7/8 seats, rating 0/5/99, password 5/6</li><li><strong>Decision table testing</strong> <span class='small'>(Method)</span> — Booking rules combinations</li><li><strong>State transition testing</strong> <span class='small'>(Method)</span> — Ride/booking/payment status machines</li><li><strong>Cause-effect graphing</strong> <span class='small'>(Method)</span> — Input conditions to booking/payment outcomes</li><li><strong>Pairwise / combinatorial testing</strong> <span class='small'>(Method)</span> — Vehicle x seats x price x AC x date</li><li><strong>Domain testing</strong> <span class='small'>(Method)</span> — Karachi areas and seat domain 1-7</li><li><strong>Comparison testing</strong> <span class='small'>(Method)</span> — UI result vs direct API result</li><li><strong>Scenario testing</strong> <span class='small'>(Method)</span> — Real student commute scenarios (FAST-NUCES)</li><li><strong>Business workflow testing</strong> <span class='small'>(Method)</span> — Full carpool lifecycle journeys</li><li><strong>Functional testing</strong> <span class='small'>(Functional)</span> — Auth, rides, bookings, messages correctness</li><li><strong>Business logic testing</strong> <span class='small'>(Functional)</span> — Seat math, amountPaid, own-ride rule</li><li><strong>Workflow testing</strong> <span class='small'>(Functional)</span> — Offer ride -&gt; book -&gt; confirm -&gt; complete</li><li><strong>CRUD testing</strong> <span class='small'>(Functional)</span> — Create/Read/Update/Delete entities</li><li><strong>Form validation testing</strong> <span class='small'>(Functional)</span> — Required fields, types, ranges on forms</li><li><strong>Search / filter testing</strong> <span class='small'>(Functional)</span> — Origin/destination/seats/price filters</li><li><strong>Sorting / pagination testing</strong> <span class='small'>(Functional)</span> — Ride list order and limit/offset</li><li><strong>Booking lifecycle testing</strong> <span class='small'>(Functional)</span> — Create, confirm, cancel, complete, rate</li><li><strong>Payment flow testing</strong> <span class='small'>(Functional)</span> — Method selection, success, double-pay, refund</li><li><strong>Messaging testing</strong> <span class='small'>(Functional)</span> — Send, conversations, empty content, XSS</li><li><strong>Profile management testing</strong> <span class='small'>(Functional)</span> — View/update profile fields</li><li><strong>Rating / review testing</strong> <span class='small'>(Functional)</span> — Review creation rules and bounds</li><li><strong>Notification / badge testing</strong> <span class='small'>(Functional)</span> — Unread message badge behaviour</li><li><strong>UI testing</strong> <span class='small'>(UI)</span> — Visual layout, components, form controls</li><li><strong>Usability testing</strong> <span class='small'>(UI)</span> — Ease of tasks, error message clarity</li><li><strong>Navigation testing</strong> <span class='small'>(UI)</span> — Dead links, route handling, 404</li><li><strong>Consistency testing</strong> <span class='small'>(UI)</span> — Naming, spacing, colour consistency</li><li><strong>Content / copy review</strong> <span class='small'>(UI)</span> — Marketing claims vs reality</li><li><strong>Empty-state testing</strong> <span class='small'>(UI)</span> — Behaviour with no rides/bookings/messages</li><li><strong>Loading-state testing</strong> <span class='small'>(UI)</span> — Perceived performance during page load</li><li><strong>Error-state testing</strong> <span class='small'>(UI)</span> — Wrong password, invalid inputs, API failures</li><li><strong>Confirmation dialog testing</strong> <span class='small'>(UI)</span> — Destructive actions (cancel ride/booking)</li><li><strong>Help text / affordance testing</strong> <span class='small'>(UI)</span> — Labels and guidance completeness</li><li><strong>Onboarding flow testing</strong> <span class='small'>(UI)</span> — First-run experience for new users</li><li><strong>Accessibility testing (WCAG)</strong> <span class='small'>(UI)</span> — Alt text, labels, button names</li><li><strong>Keyboard navigation testing</strong> <span class='small'>(UI)</span> — Tab order / focusability spot checks</li><li><strong>Screen reader compatibility check</strong> <span class='small'>(UI)</span> — ARIA/label presence via DOM audit</li><li><strong>Color contrast spot-check</strong> <span class='small'>(UI)</span> — Visual inspection of text backgrounds</li><li><strong>Internationalization readiness</strong> <span class='small'>(UI)</span> — Date/currency/phone formats (PK)</li><li><strong>Localization testing</strong> <span class='small'>(UI)</span> — Currency Rs., phone +92, university names</li><li><strong>RTL / language toggle review</strong> <span class='small'>(UI)</span> — Urdu/English claims vs implementation</li><li><strong>Cross-browser testing</strong> <span class='small'>(Compatibility)</span> — Chromium + Firefox + WebKit render</li><li><strong>Cross-platform testing</strong> <span class='small'>(Compatibility)</span> — Linux host; engines covering Win/Mac</li><li><strong>Responsive design testing</strong> <span class='small'>(Compatibility)</span> — 320-1920px viewport overflow checks</li><li><strong>Device emulation testing</strong> <span class='small'>(Compatibility)</span> — iPhone SE/14, Galaxy S, iPad sizes</li><li><strong>Touch vs mouse testing</strong> <span class='small'>(Compatibility)</span> — Mobile viewport tap targets</li><li><strong>Screen resolution testing</strong> <span class='small'>(Compatibility)</span> — 360, 375, 390, 768, 1024, 1440 widths</li><li><strong>Browser zoom / scaling review</strong> <span class='small'>(Compatibility)</span> — Layout at high DPI viewports</li><li><strong>Dark/light theme review</strong> <span class='small'>(Compatibility)</span> — Theme consistency where applicable</li><li><strong>Load testing</strong> <span class='small'>(Performance)</span> — Search API large limit; page load timing</li><li><strong>Stress testing</strong> <span class='small'>(Performance)</span> — limit=999999 query abuse check</li><li><strong>Spike testing</strong> <span class='small'>(Performance)</span> — Rapid sequential API calls</li><li><strong>Endurance / soak awareness</strong> <span class='small'>(Performance)</span> — Long-lived JWT / session design review</li><li><strong>Volume testing</strong> <span class='small'>(Performance)</span> — Large payload registration</li><li><strong>Scalability review</strong> <span class='small'>(Performance)</span> — Caching, pagination, query patterns</li><li><strong>Concurrency / race condition testing</strong> <span class='small'>(Performance)</span> — Seat decrement without transaction</li><li><strong>Latency testing</strong> <span class='small'>(Performance)</span> — Navigation timing on home page</li><li><strong>Bundle / resource size review</strong> <span class='small'>(Performance)</span> — Asset sizes via network metrics</li><li><strong>Bandwidth throttling review</strong> <span class='small'>(Performance)</span> — Mobile viewport behaviour</li><li><strong>Offline / network error testing</strong> <span class='small'>(Performance)</span> — API fallback to mock data</li><li><strong>CPU / memory spot-check</strong> <span class='small'>(Performance)</span> — Headless browser session stability</li><li><strong>Authentication testing</strong> <span class='small'>(Security)</span> — Login/logout, wrong password, empty password</li><li><strong>Authorization testing</strong> <span class='small'>(Security)</span> — Protected routes without/with invalid JWT</li><li><strong>Session management testing</strong> <span class='small'>(Security)</span> — JWT localStorage, 7-day expiry, revoke gap</li><li><strong>Token security testing</strong> <span class='small'>(Security)</span> — Garbage token, payload tampering rejection</li><li><strong>OWASP Top 10 review</strong> <span class='small'>(Security)</span> — Mapped findings to OWASP categories</li><li><strong>XSS testing</strong> <span class='small'>(Security)</span> — Stored/reflected payloads in name, notes, messages</li><li><strong>SQL injection testing</strong> <span class='small'>(Security)</span> — Parameter fuzzing via ORM usage review</li><li><strong>CSRF testing</strong> <span class='small'>(Security)</span> — Bearer-token architecture reduces classic CSRF</li><li><strong>IDOR / broken access control testing</strong> <span class='small'>(Security)</span> — Cross-user booking/ride/profile access</li><li><strong>Mass assignment testing</strong> <span class='small'>(Security)</span> — Extra fields on ride create/update</li><li><strong>Privilege escalation testing</strong> <span class='small'>(Security)</span> — Passenger self-confirm, self-verify</li><li><strong>Account enumeration testing</strong> <span class='small'>(Security)</span> — Login responses for unknown vs wrong password</li><li><strong>Brute force / rate limiting testing</strong> <span class='small'>(Security)</span> — Burst requests on unprotected routes</li><li><strong>Password policy testing</strong> <span class='small'>(Security)</span> — Min length 6, complexity expectations</li><li><strong>Input validation / fuzzing</strong> <span class='small'>(Security)</span> — Invalid email/phone/status/limit params</li><li><strong>Security header testing</strong> <span class='small'>(Security)</span> — CSP, XFO, HSTS, Permissions-Policy audit</li><li><strong>HTTPS / transport testing</strong> <span class='small'>(Security)</span> — HSTS header present on live site</li><li><strong>CORS testing</strong> <span class='small'>(Security)</span> — Evil origin probe on API</li><li><strong>Sensitive data exposure testing</strong> <span class='small'>(Security)</span> — Phone/PII in public APIs</li><li><strong>Error message leakage review</strong> <span class='small'>(Security)</span> — Generic vs verbose error strings</li><li><strong>Injection in API parameters</strong> <span class='small'>(Security)</span> — Query/body fuzzing via script</li><li><strong>API testing</strong> <span class='small'>(API)</span> — All auth/rides/bookings/payments/messages endpoints</li><li><strong>HTTP method testing</strong> <span class='small'>(API)</span> — GET/POST/PUT usage per REST design</li><li><strong>HTTP status code testing</strong> <span class='small'>(API)</span> — 200/201/400/401/403/404/500 behaviour</li><li><strong>Content-type / payload testing</strong> <span class='small'>(API)</span> — JSON body handling</li><li><strong>Response schema / contract testing</strong> <span class='small'>(API)</span> — success/message/data shape consistency</li><li><strong>Pagination / limit testing</strong> <span class='small'>(API)</span> — limit/offset parameters</li><li><strong>Database constraint testing</strong> <span class='small'>(API)</span> — Sequelize validation min/max/isEmail/is</li><li><strong>Data integrity testing</strong> <span class='small'>(API)</span> — Seat inventory before/after cancel</li><li><strong>Transaction / ACID review</strong> <span class='small'>(API)</span> — Missing transaction on booking seat update</li><li><strong>Seed data validation</strong> <span class='small'>(API)</span> — Demo users/rides from backend boot seed</li><li><strong>Migration / sync behavior testing</strong> <span class='small'>(API)</span> — sequelize.sync force:true impact</li><li><strong>Reliability testing</strong> <span class='small'>(Non-functional)</span> — DB wipe on restart, mock fallback</li><li><strong>Recovery testing</strong> <span class='small'>(Non-functional)</span> — Behaviour after failed booking/payment</li><li><strong>Install / deploy config review</strong> <span class='small'>(Non-functional)</span> — Procfile, render.yaml, PM2, Caddy</li><li><strong>Documentation review</strong> <span class='small'>(Non-functional)</span> — README claims vs implemented features</li><li><strong>SEO / metadata testing</strong> <span class='small'>(Non-functional)</span> — Title, meta tags on live HTML</li><li><strong>Dead-link testing</strong> <span class='small'>(Non-functional)</span> — Forgot password and nav links</li><li><strong>Logging / console error review</strong> <span class='small'>(Non-functional)</span> — Browser console during critical pages</li><li><strong>Health-check testing</strong> <span class='small'>(Non-functional)</span> — GET /api/health</li><li><strong>Maintainability observation</strong> <span class='small'>(Non-functional)</span> — Code smells reported as QA findings</li><li><strong>Process / QA readiness review</strong> <span class='small'>(Non-functional)</span> — Absence of automated tests</li><li><strong>Configuration security review</strong> <span class='small'>(Non-functional)</span> — Hardcoded secrets, CORS allowlist</li><li><strong>Session-based exploratory testing</strong> <span class='small'>(Exploratory)</span> — Time-boxed exploration notes per module</li><li><strong>Monkey / random testing</strong> <span class='small'>(Exploratory)</span> — Random invalid params and rapid clicks</li><li><strong>Key-tour testing</strong> <span class='small'>(Exploratory)</span> — Critical path tours without detailed scripts</li><li><strong>Persona-based testing</strong> <span class='small'>(Exploratory)</span> — Student passenger vs driver personas</li><li><strong>Crowd-style scenario testing</strong> <span class='small'>(Exploratory)</span> — Multiple concurrent user roles via API</li><li><strong>Data-driven testing</strong> <span class='small'>(Exploratory)</span> — Scripted datasets for seats/price/status</li><li><strong>Mutation-style input testing</strong> <span class='small'>(Exploratory)</span> — Mutating valid requests with invalid fields</li><li><strong>Chaos awareness review</strong> <span class='small'>(Exploratory)</span> — Backend restart impact (DB wipe)</li><li><strong>Accessibility regression spot-check</strong> <span class='small'>(Exploratory)</span> — Repeat label/alt audits</li><li><strong>Performance budget check</strong> <span class='small'>(Exploratory)</span> — Home load timing vs expectations</li><li><strong>Cross-session data check</strong> <span class='small'>(Exploratory)</span> — Data persistence across browser sessions</li><li><strong>Error recovery path testing</strong> <span class='small'>(Exploratory)</span> — What user sees after failures</li></ol>
+<div class="pagebreak" id="sD"></div>
+<h2 class="sec">Appendix D — References Helpful in Testing (52)</h2>
+<ol class="link-list">
+<li><strong>ISO/IEC 25010:2011 Systems and software Quality Requirements and Evaluation (SQuaRE)</strong> — https://www.iso.org/standard/35736.html</li><li><strong>ISO/IEC 25023:2016 SQuaRE — Measurement of system and software product quality</strong> — https://www.iso.org/standard/64774.html</li><li><strong>ISTQB Foundation Level Syllabus 2018</strong> — https://www.istqb.org/certifications/foundation-level</li><li><strong>ISTQB glossary of testing terms</strong> — https://glossary.istqb.org</li><li><strong>OWASP Top 10 (2021)</strong> — https://owasp.org/www-project-top-ten/</li><li><strong>OWASP Testing Guide</strong> — https://owasp.org/www-project-web-security-testing-guide/</li><li><strong>OWASP XSS Prevention Cheat Sheet</strong> — https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html</li><li><strong>OWASP Broken Access Control (IDOR)</strong> — https://owasp.org/Top10/A01_2021-Broken_Access_Control/</li><li><strong>OWASP Mass Assignment / Over-posting</strong> — https://owasp.org/www-community/attacks/Mass_assignment</li><li><strong>OWASP SQL Injection Prevention Cheat Sheet</strong> — https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html</li><li><strong>OWASP Authentication Cheat Sheet</strong> — https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html</li><li><strong>OWASP Session Management Cheat Sheet</strong> — https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html</li><li><strong>OWASP API Security Top 10 (2023)</strong> — https://owasp.org/API-Security/editions/2023/en/0x11-t10/</li><li><strong>CWE-639: Authorization Bypass Through User-Controlled Key (IDOR)</strong> — https://cwe.mitre.org/data/definitions/639.html</li><li><strong>CWE-79: Cross-site Scripting</strong> — https://cwe.mitre.org/data/definitions/79.html</li><li><strong>CWE-862: Missing Authorization</strong> — https://cwe.mitre.org/data/definitions/862.html</li><li><strong>CWE-863: Incorrect Authorization</strong> — https://cwe.mitre.org/data/definitions/863.html</li><li><strong>W3C Web Content Accessibility Guidelines (WCAG) 2.1</strong> — https://www.w3.org/TR/WCAG21/</li><li><strong>W3C Web Accessibility Tutorials</strong> — https://www.w3.org/WAI/tutorials/</li><li><strong>Mozilla MDN — CORS</strong> — https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS</li><li><strong>Mozilla MDN — HTTP security headers</strong> — https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers</li><li><strong>Mozilla MDN — Web Storage API</strong> — https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API</li><li><strong>Mozilla MDN — Responsive design</strong> — https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design</li><li><strong>JWT.io — Introduction to JSON Web Tokens</strong> — https://jwt.io/introduction</li><li><strong>RFC 7519 — JSON Web Token (JWT)</strong> — https://tools.ietf.org/html/rfc7519</li><li><strong>Microsoft Learn — REST API design best practices</strong> — https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design</li><li><strong>Sequelize documentation — Validations</strong> — https://sequelize.org/docs/v6/core-concepts/validations/</li><li><strong>Sequelize dialect-specific things (SQLite/Postgres)</strong> — https://sequelize.org/docs/v6/other-topics/dialect-specific-things/</li><li><strong>Express.js security best practices</strong> — https://expressjs.com/en/advanced/best-practice-security.html</li><li><strong>Helmet.js</strong> — https://helmetjs.github.io/</li><li><strong>express-rate-limit</strong> — https://github.com/express-rate-limit/express-rate-limit</li><li><strong>Playwright documentation</strong> — https://playwright.dev/docs/intro</li><li><strong>Python requests documentation</strong> — https://requests.readthedocs.io/</li><li><strong>Karl Wiegers — Writing effective defect reports</strong> — https://www.processimpact.com/articles/bug_report.html</li><li><strong>James Bach — Session-based exploratory testing</strong> — https://www.satisfice.com/blog/archives/278</li><li><strong>Michael Bolton — The oracle problem</strong> — https://www.developsense.com/blog/2009/08/the-oracle-problem/</li><li><strong>IEEE 829 Test Documentation standard (reference)</strong> — https://standards.ieee.org/ieee/829/4317/</li><li><strong>ISTQB Defect / Defect lifecycle</strong> — https://glossary.istqb.org/en_US/defect</li><li><strong>Google developers — Speed / PageSpeed Insights</strong> — https://developers.google.com/speed</li><li><strong>web.dev — Best Practices</strong> — https://web.dev/learn/</li><li><strong>Can I use</strong> — https://caniuse.com/</li><li><strong>Caddy documentation</strong> — https://caddyserver.com/docs/</li><li><strong>PM2 documentation</strong> — https://pm2.keymetrics.io/docs/usage/quick-start/</li><li><strong>React documentation</strong> — https://react.dev/learn/managing-state</li><li><strong>Vite documentation — env variables</strong> — https://vitejs.dev/guide/env-and-mode.html</li><li><strong>React Router documentation</strong> — https://reactrouter.com/home</li><li><strong>NIST SP 800-63B password guidelines</strong> — https://pages.nist.gov/800-63-3/sp800-63b.html</li><li><strong>CampusPool live deployment</strong> — https://carpool.33.jugaar.ai</li><li><strong>CampusPool API health</strong> — https://carpool.33.jugaar.ai/api/health</li><li><strong>CampusPool source (local repo README)</strong> — file:///root/campuspool/README.md</li><li><strong>CampusPool DEPLOYMENT guide (local)</strong> — file:///root/campuspool/DEPLOYMENT.md</li><li><strong>Course defect-report format reference (Lewis-style)</strong> — https://www.processimpact.com/articles/bug_report.html</li></ol>
+<div class="pagebreak" id="sE"></div>
+<h2 class="sec">Appendix E — Methodology</h2>
+<h3>E.1 Approach</h3>
+<ol class="small">
+<li><strong>Reconnaissance:</strong> Mapped stack, routes, API surface, deploy topology, demo accounts.</li>
+<li><strong>Test design:</strong> Selected 133 techniques from ISTQB/ISO 25010 practice; designed partitions and boundary values for seats, price, ratings, passwords, limits.</li>
+<li><strong>Execution — API/security:</strong> Scripted HTTP campaigns on production API; captured status codes and JSON evidence.</li>
+<li><strong>Execution — UI:</strong> Playwright journeys (register/login/search/ride/booking/profile/mock pages); screenshots; responsive matrix; a11y audit; cross-browser renders.</li>
+<li><strong>Execution — white-box:</strong> Reviewed controllers/models/middleware/configs to confirm root causes.</li>
+<li><strong>Curation:</strong> Filtered false positives; assigned severity/priority/oracle/impact.</li>
+<li><strong>Reporting:</strong> Assembled this A4 print-ready report.</li>
+</ol>
+<h3>E.2 Severity Scale</h3>
+<table class="data">
+<tr><th>Severity</th><th>Definition</th></tr>
+<tr><td>Critical</td><td>Data loss, complete workflow failure, or financial trust break — release blocking</td></tr>
+<tr><td>High</td><td>Serious functional/security defect harming users, privacy, or business data</td></tr>
+<tr><td>Medium</td><td>Functional/QA defect that misleads users or hides failures</td></tr>
+<tr><td>Low</td><td>Minor usability/config/doc defect — backlog</td></tr>
+</table>
+<h3>E.3 Oracle Sources</h3>
+<ul class="small">
+<li>README feature claims and UI copy · REST/HTTP status semantics</li>
+<li>OWASP / CWE security standards (authz, XSS, PII, rate limiting)</li>
+<li>Business rules in source (own-ride ban, seat min/max, status enums)</li>
+<li>Common UX expectations (validation messages, dead links, mobile overflow)</li>
+</ul>
+<h3>E.4 Limitations</h3>
+<ul class="small">
+<li>Live demo deployment — backend restart wipes DB (reported as Critical finding).</li>
+<li>Payment gateway simulated — real JazzCash/EasyPaisa/bank flows not testable end-to-end.</li>
+<li>Mobile via viewport emulation (no physical iOS/Android devices in lab).</li>
+<li>Email/OTP flows do not exist — outbound notification testing not possible.</li>
+</ul>
+<div class="sig">
+  <div>Tester: Tehzeeb<br/>B23110106073<br/>University of Karachi</div>
+  <div>Course Head: Hussain Saleem<br/>SQET/ST (Software Quality Engineering &amp; Testing)<br/>8 October 2026</div>
+</div>
+<p class="small" style="margin-top:16pt;text-align:center;">— End of Report —</p>
+</body></html>
